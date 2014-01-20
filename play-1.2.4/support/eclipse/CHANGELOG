@@ -1,0 +1,33 @@
+0.6.0:
+   * More robust missing actions for the routes editor, and support in the template editor
+   * Propose actions inherited from superclasses in autocomplete
+   * Soft tabs
+0.6.0: Errors for missing actions in the routes editor
+0.5.1: Bug fixes
+0.5.0:
+   * Add a link to open tests (either in Eclipse's internal browser or external)
+   * More robust way of finding the route file (especially when no editor is open)
+0.4.5:
+   * Fix remaining bugs introduced by fixing the tab bug (links didn't revert to their state after hover)
+0.4.4:
+   * Introduce preference panes, make color for syntax highlighting configurable
+0.4.3:
+   * Fix the bug "all text is idented when hitting tab"
+0.4.1:
+   * Fix a bug in the autocomplete
+0.4.0:
+   * Introduce code completion for actions in the routes editor and templates editor
+   * Add wizards buttons on the toolbar
+0.3.1:
+   * Include wizards in the Play! menu
+   * Add packages support to wizards
+0.3.0:
+   * Fix links for actions when modules are involved
+   * Introduce wizards for models, views and controllers
+0.2.3: Minor fixes in the editors
+0.2.2: Folding for the HTML editor
+0.2.1: Custom editor for application.conf and new icons
+0.2.0: Custom editors for templates and routes
+0.1.1: Create view or controller when missing
+0.1.0: Initial release
+

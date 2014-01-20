@@ -1,0 +1,27 @@
+# Extracted from https://github.com/ulrich/macaron-factory/blob/master/.gitignore
+# Ignore all dotfiles...
+.*
+# except for .gitignore .gitattributes
+!.gitignore
+!.gitattributes
+
+# Ignore Play! working directory #
+#db
+eclipse
+log
+system.out
+modules
+precompiled
+tmp
+test-result
+server.pid
+modules
+bin
+ebay.log
+ebay.log.*
+*.jsonlog.txt
+*.jsonlog
+*.jsonlog.nonconcise.txt
+*.plaintext.nonconcise.txt
+*.plaintext.concise.txt
+temp_persist_config_012.xml

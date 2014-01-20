@@ -1,0 +1,11 @@
+<!-- agents top nav -->
+
+<!--<h1><font color="red">Agent tab is under maintenance.</font></h1> -->
+<ul class="nav nav-tabs">
+<li #{if (page == "index")} class="active" #{/if}><a href="/nodeGroups"><i class="fa fa-search"></i> Summary </a></li>
+<li #{if (page == "editConfignodegroup")} class="active" #{/if}><a href="/config/editConfig/nodegroup"  target="_blank" ><i class="fa fa-pencil"></i> Edit NodeGroup Config</a></li>
+<li #{if (page == "reloadConfig")} class="active" #{/if}><a href="/config/reloadConfig?type=NODEGROUP"  target="_blank" ><i class="fa fa-refresh"></i> Reload Config </a></li>
+</ul>
+<div class="row">
+
+</div>	

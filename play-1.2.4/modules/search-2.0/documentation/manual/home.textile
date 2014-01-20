@@ -1,0 +1,107 @@
+h1. Search module
+
+The **Search** module allows you to have basic full text search functionalities to your JPA Model. It is based on Lucene, and requires a real file system to store its indexes.
+
+h2. <a> Version </a>
+
+Search module versions 2.x require playframework version 1.1.
+
+h2. <a> What's new </a>
+
+ * Upgrade to lucene 3.x (you have to rebuild your indexes if using a previous version)
+ * Web console on /@search
+
+h2. <a> Enable the module</a>
+
+In the **/conf/application.conf** file, enable the Search module by adding this line: 
+
+bc. # The search module
+module.search=${play.path}/modules/search
+
+h2. <a> Indexing your objects </a>
+
+Use the **@Indexed** annotation to mark **your Model**, and then use the **@Field** to mark the fields to be indexed.
+
+bc. @Indexed
+public class Folder extends Model {
+    @Field
+    @Column(unique=true)
+    public Integer poseidonNumber; 
+    @Field
+    public String object;
+
+The **@Field** annotation currently supports only primitive types.
+
+h2. <a> Search the objects </a>
+
+Use the **Search** helper to build your queries:
+
+bc. Search.search("object:dogs", Folder.class)
+
+The first parameter is a lucene query and the second is your Model class. You may want to refer to the Lucene query documentation at this point, knowing that the **Search** maintains a separated index per class and adds the properties marked with **@Field** as a Lucene Field.
+
+The Search.search returns a query object that you can tweak:
+
+bc. Query q = Search.search("object:dogs", Folder.class);
+q.orderBy("object")
+    .page(2,5)
+    .reverse();
+    
+
+To finish your query, if you wish to retrieve your **Model** objects, use
+
+bc. List<Folder> folders = q.fetch();
+    
+
+or to get only ids (to use in a JPA query by example...):
+
+bc. List<Long> folderIds = q.fetchIds();
+    
+
+To get full informations (like relevance), you would use:
+
+bc. List<QueryResult> results = q.executeQuery();
+    
+
+h2. <a> Maintaining the indexes </a>
+
+Each time you create, update or delete your **Model** objects, the corresponding index is automatically updated. 
+
+Should you need to re-index your objects (like if you have manually modified your database), you will reboot your application with:
+
+bc. play.search.reindex=enabled
+
+or
+
+bc. play.search.reindex=true
+
+h2. <a> Embedded console </a>
+
+There is an embedded console exposed at /@search . It is turned on in dev mode with default password "search" (without quotes), and only available in production mode if you have set a password in your configuration file :
+
+bc. play.search.password=mysecretpassword
+
+In your conf/application.conf. Don't forget to remove it after!
+
+Since version 1.1, the create/update/delete of a JPA object is synchronous. It means that once you made a change to an object, the corresponding reader will automaticly be re-opened to reflect the changes. This behaviour should be ok most of the time, but should you want to increase performances, like for large updates, you could use the property 
+
+bc. play.search.sync=false
+
+To have the auto re-opening suspended. Use Search.dirtyReader with a className to re-open when you're done with your massive updates.
+
+h2. <a> Misc configuration </a>
+
+You can use the following properties in your conf/application.conf file:
+
+bc. play.search.path=/tmp/myDevApplication
+play.search.analyser=org.apache.lucene.analysis.standard.StandardAnalyzer
+play.search.lucene.version=30
+
+**play.search.path** is where the module stores its indexes
+**play.search.analyser** is the lucene analyzer class used for indexation.
+**play.search.lucene.version** is the lucene's version (for compatibility mode). Default: 30
+
+h3. <a> Lucene Version </a>
+
+The Lucene version is a compatibility mode (see "Lucene Version Enum in the Lucene's documentation":http://lucene.apache.org/java/3_0_2/api/all/org/apache/lucene/util/Version.html). The value stands for the version of Lucene (30 means Lucene 3.0.x, 23 means Lucene 2.3.x, which was the version used in play-search <= 1.4). If you want to use your previous indexes without rebuilding them, you can set this property to 23. The default value is 30.
+

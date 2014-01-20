@@ -1,0 +1,120 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+	#{include 'Commands/commandsnav.html'/}
+
+
+ <div class="span12">
+
+
+
+
+<h3>Common Commands</h3>
+<table  class="table table-hover">
+
+<tr>
+<td><h4>Command</h4></td>
+<td><h4>Description</h4></td>
+<td><h4>URL</h4></td>
+</tr>
+
+
+<tr>
+<td>ArchiveLogs</td>
+<td>Archive logs on a date (YYYYMMDD) 20131007 </td>
+<td><a href="/logs/archiveAppLogs/20131007" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+
+<tr>
+<td>DeleteLogs</td>
+<td>Delete logs on a date (YYYYMMDD) 20131007 </td>
+<td><a href="/logs/deleteAppLogs/20131007" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+
+<tr>
+<td>Cron Job Control</td>
+<td>Disable Enable the Cron job</td>
+<td><a href="/config/setRunCronJob?runCronJob=false" target="_blank" class="btn btn-primary">Disable</a> 
+<a href="/config/setRunCronJob?runCronJob=true" target="_blank" class="btn btn-primary">Enable</a>
+</td>
+</tr>
+
+
+<tr>
+<td>Delete logs</td>
+<td>Delete all logs (pin required)</td>
+<td><a href="/logs/deleteAllAppLogs" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+<tr>
+<td>ArchiveAppLogsDailyJob</td>
+<td>ArchiveAppLogsDailyJob</td>
+<td><a href="/logs/archiveAppLogsDailyJob" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+<tr>
+<td>DeleteAppLogsDailyJob</td>
+<td>DeleteAppLogsDailyJob</td>
+<td><a href="/logs/deleteAppLogsDailyJob" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+<tr>
+<td>ShutDownActorSystem</td>
+<td>ShutDownActorSystem</td>
+<td><a href="/config/shutDownActorSystem" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+<tr>
+<td>RunGarbageCollection</td>
+<td>RunGarbageCollection</td>
+<td><a href="/config/runGC" target="_blank" class="btn btn-primary">Execute</a>
+</td>
+</tr>
+
+<tr>
+<td>getAgentData</td>
+<td>Get raw data (may be slow) </td>
+<td>
+
+<table  class="table table-hover">
+<tr>
+<td>
+<a href="/agents/getAgentData" target="_blank" class="btn btn-primary">All Raw Data with Nodes Group</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="/agents/getAgentData?isAdhoc=true" target="_blank" class="btn btn-primary">All Raw Data in Ad Hoc Data</a>
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+
+
+
+</table>
+<br/>
+</div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

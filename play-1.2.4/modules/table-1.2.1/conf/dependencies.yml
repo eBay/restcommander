@@ -1,0 +1,4 @@
+self: play -> table 1.2.1
+
+require:
+    - play [1.2,)

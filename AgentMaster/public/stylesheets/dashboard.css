@@ -1,0 +1,61 @@
+	div.dataTables_length label {
+	float: right;
+	}
+
+	.ui-multiselect.asset-filter{
+ 		 color:black;
+  	 	 font-size: 14px;
+     	 font-family: "Arial"
+	}
+
+	.ui-multiselect-menu.asset-filter{
+	  	color:black;
+	    font-size: 14px;
+	    font-family: "Arial"
+	}
+	
+	
+	.tabs { margin-bottom: 0;} /* Override of default margin */
+	.tab-pane { padding: 20px; margin-bottom: 30px; border: 1px solid #ddd; }
+
+	.tab-content > .active, .pill-content > .active {
+		display: block;
+		margin-top: -1px;
+	}
+	
+	#filterDiv .nav{
+  		margin-bottom: 0px;
+	}
+	
+	.ui-multiselect-header {
+	  background:#0088CC !important;
+	  border-color:#0088CC !important;
+	}
+	
+	.ui-state-hover {
+  		 background:#0088CC !important;
+		 border-color:#0088CC !important;
+  		color:#FFFFFF !important;
+	}
+	
+	.ui-corner-all > span {
+    	margin-left: 5px;
+	}
+	
+	.ui-multiselect-checkboxes label input {
+   	 position: relative;
+    	top: -2px;
+	}
+
+	.ui-widget-header {
+		 background:#0088CC !important;
+		 border-color:#0088CC !important;
+  		color:#FFFFFF !important;
+	}
+	.ui-state-focus {
+	  color:#FFFFFF !important; 
+	}
+
+	.tag {
+		margin-left: 10px;
+		}

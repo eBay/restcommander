@@ -1,0 +1,64 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+#{data-table-init tableName:'nodegroup-list-all', defaultSize:'50', , sortSpec:'[]' /}
+
+<div class="container">
+#{include 'NodeGroups/nodegroupsnav.html'/}
+#{include 'tags/refresh.html'/}
+
+
+	<script  type="text/javascript">
+		
+    var generateIcon=function(healthStr){
+   	
+					var	iconDiskHealthy="";
+					
+					if(healthStr==true){
+						iconDiskHealthy=" <i class=\"icon-ok\"></i>"
+					}else{
+						iconDiskHealthy=" <i class=\"icon-remove\"></i>"
+					}
+					document.write(iconDiskHealthy);
+					
+    }
+    </script>
+<h2>Nodes Defined in Config</h2>
+	<div  id="list-all-row">
+		<br/>
+			#{table-declare tableName:'nodegroup-list-all' /}
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>NodeGroupType</th>
+					<th>Node Count</th>
+					<th>View</th>
+					<th>DataSourceType</th>
+				</tr>
+			</thead>
+			<tbody>
+				#{list items:nodeGroups, as:'obj'}
+				<tr>
+					<td>${obj_index}</td>
+					<td><a target=_blank href="nodeGroups/nodeGroupType?nodeGroupType=${obj.nodeGroupType}" >${obj.nodeGroupType}</a> </td>
+					<td>${obj.nodeCount}</td>
+					<td><a target=_blank href="nodeGroups/nodeGroupType?nodeGroupType=${obj.nodeGroupType}&isTxtFqdnOnly=true" ><i class="fa fa-download fa-lg"></i></a> </td>
+					<td>${obj.dataSourceType}</td>
+				</tr>
+				#{/list}
+			</tbody>
+		</table>
+
+	</div>
+
+
+
+
+
+
+</div>
+
+	#{include 'Application/footer.html'/}
+</body>
+</html>

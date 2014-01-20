@@ -1,0 +1,65 @@
+h1. Play! Table Module
+
+This module eases displaying data in HTML tables.
+
+h2. Installation
+
+Install and enable this module as any other "Play! module":http://www.playframework.org/documentation/latest/modules
+
+h2. Table templates tags
+
+The module just provides two templates tags which can be directly used in your Play! views.
+
+h3. table
+
+The *table* tag generates a HTML @<table>@. If you pass it a list of Play! models all their properties will be displayed:
+
+bc. #{table users /}
+
+You can also precise the set of properties you want to display, by setting a @columns@ parameter containing a map of (property −> label):
+
+bc. #{table users, columns: ['fullname':'Name', 'isAdmin':'Administrator'] /}
+
+This form may be enough for simple use cases, but you may want to have more control on the way the properties are displayed. For that purpose you can define the content of the rows in the tag body using *column* tags:
+
+bc. #{table users, as: 'user'}
+  #{column 'Name'}
+    ${user.fullname.capitalizeWords()}
+  #{/column}
+  #{column 'Administrator'}
+    ${user.isAdmin?'Yes':'No'}
+  #{/column}
+#{/table}
+
+The tag body will be executed for each item of the given list (@users@ in the example), and an iterator variable, set by the @as@ parameter (@user@ in the example), will be injected in the body (similarly to the Play! *list* tag).
+
+You can add custom attributes to the generated @<table>@ tag by passing them as parameters of the @#{table}@ tag:
+
+bc. #{table users, class: 'user-table', summary: 'User list', rowClass: 'user-row' /}
+
+The @rowClass@ parameter is special: if present, all rows (@<tr>@ tags) will be given a @class@ attribute with its value.
+Furthermore, each @<tr>@ element will automatically be given an *odd* or *even* class, according to its position in the item list.
+
+p(note). If you don’t write body you can use the *table* tag only with Play! models (ie. any class implementing @play.db.Model@). However, if you provide a body you can use it with any data type.
+
+h3. column
+
+This tag can only be used inside a *table* tag. It generates a @<td>@ HTML element:
+
+bc. #{table users, as: 'user'}
+  #{column 'Name'}${user.fullname}#{/column}
+#{/table}
+
+Its first parameter sets the column title and its body defines the column content.
+
+You can also pass additional parameters to add attributes to the @<td>@ element:
+
+bc. #{table users, as: 'user'}
+  #{column 'Name', class: 'user-column-name'}${user.fullname}#{/table}
+#{/table}
+
+h2. Changelog
+
+h3. v1.2.1
+
+* Allow to set arbitrary attributes to the @<table>@ and the @<tr>@ tags ("Github issue #1":https://github.com/julienrf/play-table/issues/1).

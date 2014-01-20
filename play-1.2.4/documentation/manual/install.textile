@@ -1,0 +1,91 @@
+h1. Installation guide
+
+
+h2. <a name="prerequisites">Prerequisites</a>
+
+To run the Play framework, you need "Java 5 or later":http://java.sun.com. If you wish to build Play from source, you will need the "Git source control client":http://git-scm.com/ to fetch the source code and "Ant":http://ant.apache.org/ to build it.
+
+Be sure to have Java in the current path (enter @java -version@ to check). Play will use the default Java or the one available at the @$JAVA_HOME@ path if defined.
+
+The *play* command line utility uses Python. So it should work out of the box on any UNIX system (however it requires at least Python 2.5).
+
+
+h2. <a name="install">Installation from the binary package</a>
+
+h3. Generic instructions
+
+In general, the installation instructions are as follows.
+
+# Install Java.
+# Download the latest "Play binary package":http://download.playframework.org/ and extract the archive.
+# Add the ‘play’ command to your system path and make sure it is executable.
+
+
+h3. Mac OS X
+
+Java is built-in, or installed automatically, so you can skip the first step.
+
+# Download the latest "Play binary package":http://download.playframework.org/ and extract it in @/Applications@.
+# Edit @/etc/paths@ and add the line @/Applications/play-1.2.4@ (for example).
+
+An alternative on OS X is:
+
+# install "HomeBrew":http://mxcl.github.com/homebrew/
+# run @brew install play@
+
+h3. Linux
+
+To install Java, make sure to use either the Sun-JDK or OpenJDK (and not gcj which is the default Java command on many Linux distros)
+
+
+h3. Windows
+
+To install Java, just download and install the latest JDK package. You do not need to install Python separately, because a Python runtime is bundled with the framework.
+
+
+h2. <a name="build">Build from the latest sources</a>
+
+To benefit from the latest improvements and bug fixes, you may want to compile Play from sources. You’ll need a "Git client":http://git-scm.com/ to fetch the sources and "Ant":http://ant.apache.org/ to build the framework.
+
+From the command line:
+
+bc. # git clone git://github.com/playframework/play.git
+# cd play/framework
+# ant
+
+The Play framework is ready to use.
+
+
+h2. <a name="run">Using the play command</a>
+
+When the framework is correctly installed, open a shell and execute *play*. 
+
+bc. $ play
+
+You should see the play default message:
+
+!images/help!
+
+You can get more help on any specific command using *play help any-command-name-here*. For example, try:
+
+bc. # play help run
+
+h2. <a name="new">Creating a new application</a>
+
+Use the @new@ command to create a new application. You must give a non-existent path where the application will be created.
+
+bc. # play new myApp
+
+!images/guide1-1!
+
+Will create a new application. Start it with:
+
+bc. # play run myApp
+
+You can then open a browser at "http://localhost:9000":http://localhost:9000 and see the default page for the application.
+
+!images/guide1-2!
+
+p(note). **Your Play environnement is ready**
+ 
+Next: %(next)"Set-up your preferred IDE":ide%.

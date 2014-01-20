@@ -1,0 +1,5 @@
+h1. Module Table
+
+This module aims to simplify the code needed to display data in HTML tables.
+
+See the "documentation":play-table/blob/master/documentation/manual/home.textile or the "sample application":play-table-sample for more information.

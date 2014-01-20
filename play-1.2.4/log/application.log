@@ -1,0 +1,9 @@
+2012-11-28 12:04:19,990 {main} INFO  ~ Starting S:\GitSources\ceilometer\ceilometer
+2012-11-28 12:04:19,994 {main} WARN  ~ Declaring modules in application.conf is deprecated. Use dependencies.yml instead (module.table)
+2012-11-28 12:04:19,995 {main} INFO  ~ Module table is available (S:\GitSources\ceilometer\Applications\play-1.2.4\modules\table-1.2.1)
+2012-11-28 12:04:19,995 {main} WARN  ~ Declaring modules in application.conf is deprecated. Use dependencies.yml instead (module.crud)
+2012-11-28 12:04:19,995 {main} INFO  ~ Module crud is available (S:\GitSources\ceilometer\Applications\play-1.2.4\modules\crud)
+2012-11-28 12:04:19,995 {main} WARN  ~ Declaring modules in application.conf is deprecated. Use dependencies.yml instead (module.search)
+2012-11-28 12:04:19,996 {main} INFO  ~ Module search is available (S:\GitSources\ceilometer\Applications\play-1.2.4\modules\search-2.0)
+2012-11-28 12:04:20,811 {main} WARN  ~ You're running Play! in DEV mode
+2012-11-28 12:04:20,881 {main} ERROR ~ Could not bind on port 9000

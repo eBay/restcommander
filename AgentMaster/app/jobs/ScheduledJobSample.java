@@ -16,7 +16,7 @@ import play.jobs.OnApplicationStart;
 // at 4am
 //@On("0 0 4 * * ?")
 // every minute
-@On("0 * * * * ?")
+//@On("0 * * * * ?")
 public class ScheduledJobSample extends Job {
 
 	public void doJob() {

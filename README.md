@@ -34,7 +34,7 @@ Generic, fast HTTP/REST client sending requests to 1000 nodes with response aggr
 ###Run Instructions
 
 #### Directly Under Windows/Linux With Zero Installation: 
-* Assuming have JDK and Python pre-installed.
+* Assuming have Java (JDK or most time just JRE) pre-installed.
 
 ##### WINDOWS
 * double click: start_application_win.bat . Just close the window to shutdown the server. 

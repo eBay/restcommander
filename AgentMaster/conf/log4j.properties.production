@@ -1,0 +1,38 @@
+log4j.rootLogger=INFO, Rolling
+ 
+log4j.logger.play=INFO
+
+log4j.logger.jobs.monitor=INFO,JVM
+log4j.additivity.jobs.monitor=false
+
+log4j.logger.utils.http=INFO,HTTP
+log4j.additivity.utils.http=false
+ 
+# Console
+log4j.appender.Console=org.apache.log4j.ConsoleAppender
+log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+log4j.appender.Console.layout.ConversionPattern=%d{yyyy.MM.dd.HH.mm.ss.SSSZ} %-5p ~ %m%n
+
+# Rolling files
+log4j.appender.Rolling=org.apache.log4j.RollingFileAppender
+log4j.appender.Rolling.File=log/application.log
+log4j.appender.Rolling.MaxFileSize=100MB
+log4j.appender.Rolling.MaxBackupIndex=25
+log4j.appender.Rolling.layout=org.apache.log4j.PatternLayout
+log4j.appender.Rolling.layout.ConversionPattern=%d{yyyy.MM.dd.HH.mm.ss.SSSZ} {%t} %-5p ~ %m%n
+
+# JVM logs
+log4j.appender.JVM=org.apache.log4j.RollingFileAppender
+log4j.appender.JVM.File=log/jvm.log
+log4j.appender.JVM.MaxFileSize=100MB
+log4j.appender.JVM.MaxBackupIndex=10
+log4j.appender.JVM.layout=org.apache.log4j.PatternLayout
+log4j.appender.JVM.layout.ConversionPattern=%d{yyyy.MM.dd.HH.mm.ss.SSSZ} %-5p ~ %m%n
+
+# HTTP logs
+log4j.appender.HTTP=org.apache.log4j.RollingFileAppender
+log4j.appender.HTTP.File=log/http.log
+log4j.appender.HTTP.MaxFileSize=100MB
+log4j.appender.HTTP.MaxBackupIndex=10
+log4j.appender.HTTP.layout=org.apache.log4j.PatternLayout
+log4j.appender.HTTP.layout.ConversionPattern=%d{yyyy.MM.dd.HH.mm.ss.SSSZ} {%t} %-5p ~ %m%n

@@ -1,0 +1,45 @@
+h1. Sample applications
+
+Play comes with the following set of sample applications in the @samples-and-test/@ directory, in the framework installation path. We use them to run our automated test suite, and you can take a look at them to discover typical Play usages.
+
+h2. <a>Yet Another Blog Engine</a>
+
+The final application from the "Play guide":guide1 tutorial.
+
+!images/yabe!
+
+h2. <a>Zencontact</a>
+
+A simple contact management application.
+
+!images/zencontact!
+
+h2. <a>Booking</a>
+
+A port of the well known 'booking' application from the JBoss seam framework.
+
+!images/booking!
+
+h2. <a>Forum</a>
+
+A simple forum application that uses JPA.
+
+!images/forum!
+
+h2. <a>Jobboard</a>
+
+A fully-featured job board application that uses the CRUD module to automatically generate the administration area. 
+
+!images/jobboard!
+
+h2. <a>Chat</a>
+
+An HTTP-based chat application. It uses the asynchronous request model to be able to handle a lot of simultaneous connected users without wasting resources.
+
+!images/chat!
+
+h2. <a>Validation</a>
+
+Demonstrates the different ways to create a form with validation support.
+
+!images/validation!

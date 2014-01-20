@@ -1,0 +1,33 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+	#{include 'Config/confignav.html'/}
+
+
+ <div class="span12">
+ 
+        <script type="text/javascript">	
+       		getAlertAndWrite("${alert}");
+		</script>
+ 
+      <h2>Edit ${configFileUpper} Configuration  </h2>
+       <p> </p>
+
+      <form class="form-horizontal" action="/config/editConfigUpdate/${configFileUpper}" method="post" >  
+        
+       	<textarea class="field span12" id="textarea" rows="30" placeholder="configFileContent" name="configFileContent"> ${configFileContent}</textarea>
+       	<br/><br/>
+        <button type="submit" class="btn btn-primary">Save</button>  
+        <a class="btn" href="#">Cancel</a>  
+       </form>
+  </div>
+
+
+</div>
+
+
+
+</body>
+</html>

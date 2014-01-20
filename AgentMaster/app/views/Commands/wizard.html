@@ -1,0 +1,320 @@
+#{include 'Application/top_head_wizard.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+	#{include 'Commands/commandsnav.html'/}
+
+
+ <div class="span6">
+        
+           	<button id="open-wizard" class="btn btn-primary">Command Wizard</button>
+  </div>
+  
+		<div class="wizard" id="wizard-commands">
+			<h1>Send REST Requests</h1>
+
+			<div class="wizard-card" data-cardname="name">
+				<h3>Select Target Nodes</h3>
+
+				<div class="wizard-input-section">
+					<p>
+						<strong>
+						CAUTION: Please VERIFY the target nodes you selected <a target="_blank" href="/nodeGroups">here</a>. 
+						</strong>
+					</p>
+
+					<select data-placeholder="Target nodes" style="width:350px;" class="chzn-select" id="target_nodes" >
+		                <option value=""></option>
+
+		            </select>
+
+				</div>
+			</div>
+
+			<div class="wizard-card" data-onload="" data-cardname="dcn_select_requests">
+				<h3>Select Requests</h3>
+
+				<div class="wizard-input-section">
+					<p>
+						<strong>
+						CAUTION: Please VERIFY the command you selected <a target="_blank" href="/commands">here</a>. 
+						</strong>
+						<br/>
+						Select the REST command on the target nodes.
+					</p>
+
+					<select data-placeholder="Commands" style="width:350px;" class="chzn-select" id="commands" >
+		                <option value=""></option>
+
+		            </select>
+
+				</div>
+			</div>
+
+			<div class="wizard-card" data-cardname="dcn_send_requests">
+				<h3>Send Requests</h3>
+
+				<div class="wizard-input-section">
+					<p>Now will (1) generate requests, (2) insert data if needed (3) send request to target node group.
+					Responses normally take 10 seconds for 1000 nodes, less than 75 seconds for 20,000 nodes. Speed also depends on the timeout setting defined in application.conf. Please wait.  
+					</p>
+					<p><a href="/logs" target="_blank" >Check response logs</a></p>
+				</div>
+			</div>
+
+			<div class="wizard-error">
+				<div class="alert alert-error">
+					<strong>There was a problem</strong> with your submission.
+					Please correct the errors and re-submit.
+				</div>
+			</div>
+
+			<div class="wizard-failure">
+				<div class="alert alert-error">
+					<strong>There was a problem</strong> submitting the form.
+					Please try again in a minute.
+				</div>
+			</div>
+
+			<div class="wizard-success" data-cardname="dcn_success">
+				<div class="alert alert-success">
+					<span class="create-server-name"></span>
+					Request was sent <strong>successfully.</strong>
+					
+				</div>
+				
+				<div class="btn-toolbar" id="response_btngroup">
+				</div>
+
+				<br/>
+
+				<div class="btn-toolbar" id="click_btngroup">
+				<a class="btn btn-success create-another-server">Send another request</a>
+				<a class="btn btn-success im-done">Done</a>
+				<a class="btn btn-success"href="/logs" target="_blank" >Response logs</a>
+				</div>
+			</div>
+
+		</div>
+
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+function setServerName(card) {
+	var host = $("#new-server-fqdn").val();
+	var name = $("#new-server-name").val();
+	var displayName = host;
+
+	if (name) {
+		displayName = name + " ("+host+")";
+	};
+
+	card.wizard.setSubtitle(displayName);
+	card.wizard.el.find(".create-server-name").text(displayName);
+}
+
+function validateIP(ipaddr) {
+    //Remember, this function will validate only Class C IP.
+    //change to other IP Classes as you need
+    ipaddr = ipaddr.replace(/\s/g, "") //remove spaces for checking
+    var re = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/; //regex. check for digits and in
+                                          //all 4 quadrants of the IP
+    if (re.test(ipaddr)) {
+        //split into units with dots "."
+        var parts = ipaddr.split(".");
+        //if the first unit/quadrant of the IP is zero
+        if (parseInt(parseFloat(parts[0])) == 0) {
+            return false;
+        }
+        //if the fourth unit/quadrant of the IP is zero
+        if (parseInt(parseFloat(parts[3])) == 0) {
+            return false;
+        }
+        //if any part is greater than 255
+        for (var i=0; i<parts.length; i++) {
+            if (parseInt(parseFloat(parts[i])) > 255){
+                return false;
+            }
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function validateFQDN(val) {
+	return /^[a-z0-9-_]+(\.[a-z0-9-_]+)*\.([a-z]{2,4})$/.test(val);
+}
+
+function fqdn_or_ip(el) {
+	var val = el.val();
+	ret = {
+		status: true
+	};
+	if (!validateFQDN(val)) {
+		if (!validateIP(val)) {
+			ret.status = false;
+			ret.msg = "Invalid IP address or FQDN";
+		}
+	}
+	return ret;
+}
+
+
+
+
+$(function() {
+	$.fn.wizard.logging = true;
+
+	var wizard = $("#wizard-commands").wizard();
+
+	$(".chzn-select").chosen();
+	// console.log("!!!outside loop: + ${nodeGroupSourceMetadataListJsonArray}"  )
+	 
+	var nodeGroupSourceMetadataListJsonArrayOld = "${nodeGroupSourceMetadataListJsonArray}";
+	var nodeGroupSourceMetadataListJsonArrayNew = nodeGroupSourceMetadataListJsonArrayOld.replace(/&quot;/g, '\"');
+	//console.log("!!!outside loop nodeGroupSourceMetadataListJsonArrayNew:" + nodeGroupSourceMetadataListJsonArrayNew  )
+	
+	var agentCommandMetadataListJsonArrayOld = "${agentCommandMetadataListJsonArray}";
+	var agentCommandMetadataListJsonArrayNew = agentCommandMetadataListJsonArrayOld.replace(/&quot;/g, '\"');
+	
+
+	 $($.parseJSON(nodeGroupSourceMetadataListJsonArrayNew)).map(function () {
+	    console.log("!!!inside loop: " + this.nodeGroupType)
+		return $('<option>').val(this.nodeGroupType).text(this.nodeGroupType);
+	}).appendTo('#target_nodes');		 
+
+	 $("#target_nodes").trigger("liszt:updated");
+	 
+	 $($.parseJSON(agentCommandMetadataListJsonArrayNew)).map(function () {
+		    console.log("!!!inside loop: " + this.nodeGroupType)
+			return $('<option>').val(this.agentCommandType).text(this.agentCommandType);
+		}).appendTo('#commands');		 
+
+		 $("#commands").trigger("liszt:updated");
+	
+	wizard.el.find(".wizard-ns-select").change(function() {
+		wizard.el.find(".wizard-ns-detail").show();
+	});
+
+	wizard.el.find(".create-server-service-list").change(function() {
+		var noOption = $(this).find("option:selected").length == 0;
+		wizard.getCard(this).toggleAlert(null, noOption);
+	});
+
+	wizard.cards["name"].on("validated", function(card) {
+		var hostname = card.el.find("#new-server-fqdn").val();
+	});
+	
+	
+	wizard.cards["dcn_send_requests"].on("validated", function(card) {
+		
+		var nodeGroupType = $("#target_nodes").val()
+		var agentCommandType = $("#commands").val()
+		var button1 ="<a class=\"btn btn-info btn-middle \" target=\"_blank\" href=\"/agents/getAgentData?nodeGroupType="
+				+ nodeGroupType + "&agentCommandType=" +agentCommandType + "\">Response data</a>" 
+		var button2 = "<a class=\"btn btn-info btn-middle \" target=\"_blank\" href=\"/agents/aggregatePieChart?nodeGroupType="
+					+ nodeGroupType + "&agentCommandType=" +agentCommandType + "&rawDataSourceType=ALL_AGENT_DATA&aggrRule=SUPERMAN_SPECIAL_STATUS_CODE\">Aggregation</a>" 
+		//var button3 = "<a class=\"btn btn-info btn-middle \" target=\"_blank\" href=\"/agents/aggregateMetrics?nodeGroupType="
+		//			+ nodeGroupType + "&agentCommandType=" +agentCommandType + "\">Number only plot</a>"
+		var button3 = "<a class=\"btn btn-info btn-middle \" target=\"_blank\" href=\"/agents/aggregatePieChart?textOnly=true&nodeGroupType="
+					+ nodeGroupType + "&agentCommandType=" +agentCommandType + "&rawDataSourceType=ALL_AGENT_DATA&aggrRule=SUPERMAN_SPECIAL_STATUS_CODE\">Aggregation in text</a>" 
+		
+		
+		var button4 = "<a class=\"btn btn-info btn-middle \" target=\"_blank\" href=\"/config/editConfig/aggregation\">Edit Regex</a>" 
+		$('#response_btngroup').children().remove();
+		$("#response_btngroup").append(button1);
+		$("#response_btngroup").append(button2);
+		$("#response_btngroup").append(button3);
+		$("#response_btngroup").append(button4);
+		 //console.log("!!!!!!button1: " + button1)
+		 //console.log("!!!!!!button2: " + button2)
+		
+	});
+
+	wizard.on("submit", function(wizard) {
+		var submitData = {
+			"nodeGroupType": $("#target_nodes").val(),
+			"agentCommandType": $("#commands").val()
+		};
+		
+	    $.ajax({
+	        url: "/commands/generateUpdateSendAgentCommandToNodeGroup",
+	        type: "POST",
+	        data: submitData,
+	        timeout: 1800000,
+	        success: function() {
+	            wizard.submitSuccess(); // displays the success card
+	            wizard.hideButtons(); // hides the next and back buttons
+	            wizard.updateProgressBar(0); // sets the progress meter to 0
+	        },
+	        
+	        error: function (xhr, ajaxOptions, thrownError) {
+	        	
+	        	errorSummary = "HTTP error status: " + xhr.status
+	            +" ThrowError: " + thrownError;
+	            
+	            $(".alert-error")
+	            .append("<strong>Error Summary:</strong><br/>")
+	            .append(errorSummary)
+	            .append("<br/><strong>Detail Error Message:</strong><br/>")
+	            .append(xhr.responseText);
+	            
+	            
+	            wizard.submitError(); // display the error card
+	            wizard.hideButtons(); // hides the next and back buttons
+	        }
+	    });		
+
+/* 		setTimeout(function() {
+			wizard.trigger("success");
+			wizard.hideButtons();
+			wizard._submitting = false;
+			wizard.showSubmitCard("success");
+			wizard._updateProgressBar(0);
+		}, 2000); */
+	});
+
+	
+	 
+	
+	
+
+	wizard.on("reset", function(wizard) {
+		wizard.setSubtitle("");
+		wizard.el.find("#new-server-fqdn").val("");
+		wizard.el.find("#new-server-name").val("");
+	});
+
+	wizard.el.find(".wizard-success .im-done").click(function() {
+		wizard.reset().close();
+	});
+
+	wizard.el.find(".wizard-success .create-another-server").click(function() {
+		wizard.reset();
+	});
+
+	$(".wizard-group-list").click(function() {
+		alert("Disabled for demo.");
+	});
+
+	$("#open-wizard").click(function() {
+		wizard.show();
+	});
+
+	wizard.show();
+});
+
+</script>
+
+
+</body>
+</html>

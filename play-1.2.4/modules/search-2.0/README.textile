@@ -1,0 +1,7 @@
+h1. Play-Search module
+
+This modules enables full text search features on your JPA model
+
+h2. Documentation
+
+Please see http://www.playframework.org/modules/search-head/home

@@ -1,0 +1,23 @@
+02 Dec 2011 14:41:02,260 DEBUG ~ Creating new CacheManager with default config
+02 Dec 2011 14:41:02,263 DEBUG ~ Configuring ehcache from classpath.
+02 Dec 2011 14:41:02,266 DEBUG ~ Configuring ehcache from ehcache.xml found in the classpath: file:/Volumes/Data/gbo/Desktop/play/head/framework/classes/ehcache.xml
+02 Dec 2011 14:41:02,268 DEBUG ~ Configuring ehcache from URL: file:/Volumes/Data/gbo/Desktop/play/head/framework/classes/ehcache.xml
+02 Dec 2011 14:41:02,268 DEBUG ~ Configuring ehcache from InputStream
+02 Dec 2011 14:41:02,291 DEBUG ~ Ignoring ehcache attribute xmlns:xsi
+02 Dec 2011 14:41:02,291 DEBUG ~ Ignoring ehcache attribute xsi:noNamespaceSchemaLocation
+02 Dec 2011 14:41:02,294 DEBUG ~ Disk Store Path: /var/folders/vX/vXQj3rRrH7CZDHXT3WOoLU+++TI/-Tmp-/
+02 Dec 2011 14:41:02,306 DEBUG ~ propertiesString is null.
+02 Dec 2011 14:41:02,309 DEBUG ~ No disk store path defined. Skipping disk store path conflict test.
+02 Dec 2011 14:41:02,309 DEBUG ~ No CacheManagerEventListenerFactory class specified. Skipping...
+02 Dec 2011 14:41:02,357 DEBUG ~ No BootstrapCacheLoaderFactory class specified. Skipping...
+02 Dec 2011 14:41:02,357 DEBUG ~ CacheWriter factory not configured. Skipping...
+02 Dec 2011 14:41:02,357 DEBUG ~ No CacheExceptionHandlerFactory class specified. Skipping...
+02 Dec 2011 14:41:02,367 DEBUG ~ Initialized net.sf.ehcache.store.MemoryStore for play
+02 Dec 2011 14:41:02,369 DEBUG ~ Initialised cache: play
+02 Dec 2011 14:41:02,369 DEBUG ~ playCache: playMemoryStore miss for EhCacheImplTest_verifyThatTTLSurvivesIncrDecr
+02 Dec 2011 14:41:02,369 DEBUG ~ play cache - Miss
+02 Dec 2011 14:41:02,473 DEBUG ~ playCache: playMemoryStore hit for EhCacheImplTest_verifyThatTTLSurvivesIncrDecr
+02 Dec 2011 14:41:02,574 DEBUG ~ playCache: playMemoryStore hit for EhCacheImplTest_verifyThatTTLSurvivesIncrDecr
+02 Dec 2011 14:41:03,524 DEBUG ~ playCache: playMemoryStore hit for EhCacheImplTest_verifyThatTTLSurvivesIncrDecr
+02 Dec 2011 14:41:03,684 DEBUG ~ play Memory cache hit, but element expired
+02 Dec 2011 14:41:03,685 DEBUG ~ play cache - Miss

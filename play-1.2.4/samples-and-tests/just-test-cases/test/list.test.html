@@ -1,0 +1,20 @@
+#{selenium 'Check #list tag'}
+
+	open('@{Application.listTag()}')
+	
+	// Check result
+	assertText('a', '*- 1. aa ,* = 2. ab ,*- 3. ac .*')
+	assertText('b', '*- 1. 0 ,* = 2. 1 ,*- 3. 2 ,* = 4. 3 .*')
+	assertText('c', '*- 1. 0 ,* = 2. 1 ,*- 3. 2 ,* = 4. 3 .*')
+	assertText('d', '*- 1. aa ,* = 2. ab ,*- 3. ac .*')
+	assertText('e', '*- 1. 1 ,* = 2. 2 ,*- 3. 3 ,*= 4. 4 ,*- 5. 5 .*')
+	assertTextNotPresent('COUCOU')
+	assertTextNotPresent('OOPS')
+	assertText('g', '*Nothing to display*')
+	assertText('h', '*Yeah*')
+	assertText('i', '*- 1. aa ,* = 2. ab ,*- 3. ac .*')
+	assertText('j', '*- 1. aa ,* = 2. ab ,*- 3. ac .*')
+	assertText('k', '*- 1. 1 ,* = 2. 2 ,*- 3. 3 ,*= 4. 4 ,*- 5. 5 .*')
+	assertTextLike('l', '1 2 3 4 5 6')
+
+#{/selenium}

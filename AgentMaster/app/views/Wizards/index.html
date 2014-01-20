@@ -1,0 +1,45 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+	#{include 'Wizards/wizardsnav.html'/}
+
+ <div class="span12">
+
+<h3>Wizards</h3>
+<table  class="table table-hover table-striped">
+
+<tr>
+<td><a href="/wizards/wizardToAdhocNodeGroup" target="_blank" class="btn btn-primary">Command to Adhoc Nodes</a>
+<td>With ad hoc node list. Wizard for running pre-defined command to arbitrary new target nodes.</td>
+</tr>
+
+<tr>
+<td><a href="/wizards/singleServerWizard" target="_blank" class="btn btn-primary">Command to a Single Server</a>
+<td>With ad hoc String list. Wizard for running pre-defined command to a single server with arbitrary set of strings to replace a single variable in the command.</td>
+</tr>
+
+<tr>
+<td><a href="/commands/wizard" target="_blank" class="btn btn-primary">Command to Predefined Nodes</a>
+<td>Wizard for any commands to predefined node groups.</td>
+</tr>
+
+
+</table>
+
+
+
+
+
+
+
+</div>
+
+</div>
+#{include 'Application/footer.html'/}
+
+
+
+</body>
+</html>

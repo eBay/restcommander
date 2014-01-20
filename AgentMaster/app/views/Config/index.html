@@ -1,0 +1,41 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+	#{include 'Config/confignav.html'/}
+
+
+ <div class="span6">
+      <h2>${configFileAgentCommandTitle} Configuration  </h2>
+        
+       	<textarea class="field span12" id="textarea" rows="20" placeholder="Enter a short synopsis"> ${configFileContentAgentCommand}</textarea>
+  </div>
+
+ <div class="span6">
+      <h2>${configFileNodeGroupTitle} Configuration  </h2>
+        
+       	<textarea class="field span12" id="textarea" rows="20" placeholder="Enter a short synopsis"> ${configFileContentNodeGroup}</textarea>
+  </div>
+  
+  
+  
+   <div class="span6">
+      <h2>${configFileAggregationTitle} Configuration  </h2>
+        
+       	<textarea class="field span12" id="textarea" rows="20" placeholder="Enter a short synopsis"> ${configFileContentAggregation}</textarea>
+  </div>
+  
+
+
+     <div class="span6">
+      <h2>${configFileHttpheaderTitle} Configuration  </h2>
+        
+       	<textarea class="field span12" id="textarea" rows="20" placeholder="Enter a short synopsis"> ${configFileContentHttpheader}</textarea>
+  </div>
+</div>
+
+
+	#{include 'Application/footer.html'/}
+</body>
+</html>

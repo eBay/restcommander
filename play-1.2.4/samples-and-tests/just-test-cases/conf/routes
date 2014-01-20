@@ -1,0 +1,72 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET         /                               Application.index
+PUT         /sayHello                       Application.hello
+GET         /aGetForm                       Application.aGetForm
+GET         /aGetForm/                      Application.aGetForm2 
+GET         /optionalSlash/?                Application.optional 
+GET         /index                          Application.index
+
+GET         /re/{<[a-z]+>re}                Application.ok
+GET         /re/{<[0-9]{5}>re}              Application.ok
+GET         /re/{<[A-Z]{2,4}>re}            Application.ok
+
+GET         /{lucky}/doIt                   Application.showIt
+
+GET         www.zenexity.com/hello          Application.helloZen
+GET         /st%C3%A9phane                  Application.helloSteph
+GET         /hello%20world                  Application.helloWorld
+GET         {clientName}.myApp.com/home     Application.myHomePage
+GET         assets.{_}/images               Application.imagesAssets
+GET         {client}/client                 Application.dashboard
+GET         {client}.{_}/dashboard          Application.dashboard
+
+POST        /ressource/file/{id}            Rest.postOrPutFile
+PUT         /ressource/file/{id}            Rest.postOrPutFile
+POST        /ressource/fileAndParams/{id}   Rest.postOrPutFileAndParams
+PUT         /ressource/fileAndParams/{id}   Rest.postOrPutFileAndParams
+
+GET         /ressource/returnParam          Rest.returnParam
+POST        /ressource/returnParam          Rest.returnParam
+GET         /ressource/{id}                 Rest.get
+POST        /ressource/{id}                 Rest.postOrPut
+PUT         /ressource/{id}                 Rest.postOrPut
+DELETE      /ressource/{id}                 Rest.delete
+OPTIONS     /ressource/{id}                 Rest.options
+
+*			/encoding/echo/{id}				Rest.echo
+
+POST        /needAuthenticity               WithAuthenticity.needAuthenticity
+GET         /needAuthenticity               WithAuthenticity.needAuthenticity
+
+# Import the default CRUD routes
+*           /admin                           module:crud
+
+# Map static resources from the /app/public folder to the /public path
+GET         /public/                         staticDir:public
+GET         static.foo.com/assets/           staticDir:public2/assets1
+GET         static2.foo.com/x                staticDir:public2/assets2
+
+#bug in router.reverse
+GET         /notmatch/{name}/{action}        Application.{action}
+GET         /index2                          Application.index2
+
+# Catch all
+*           /sample/{controller}/{action}    sample.{controller}.{action}
+*           /{controller}/{action}           {controller}.{action}
+
+# Data binding
+
+GET     /databinding/showDefaultDateFormat/{date}/?         DataBinding.showDefaultDateFormat
+GET     /databinding/showLocaleDateFormat/{date}/?          DataBinding.showLocaleDateFormat
+GET     /databinding/showDefaultLocaleDateFormat/{date}/?   DataBinding.showDefaultLocaleDateFormat
+GET     /databinding/showDateFormat/{date}/?                DataBinding.showDateFormat
+GET     /databinding/showList/{<.*>mailboxes}/?             DataBinding.showList
+GET     /databinding/showCalendar/{cal}/?               DataBinding.showCalendar
+GET     /databinding/showCalendar2/{cal}/?               DataBinding.showCalendar2
+GET     /databinding/changeLanguage/{lang}/?                DataBinding.changeLanguage
+
+
+GET		/useAwaitViaOtherClass				WithContinuations.ControllerWithoutContinuations.useAwaitViaOtherClass

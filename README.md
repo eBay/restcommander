@@ -46,7 +46,7 @@ Generic, fast HTTP/REST client sending requests to 1000 nodes with response aggr
 * Run start_application_linux.sh
 
 #### Run/Debug With Eclipse:
-* Clone project in Git from: https://github.scm.corp.ebay.com/ypei/AgentMaster
+* Clone project in Git from: https://github.com/eBay/restsuperman
 * Extract to a folder, e.g., S:\GitSources\AgentMaster\AgentMaster. In command line run: S:\GitSources\AgentMaster\AgentMaster>play-1.2.4\play eclipsify AgentMaster
 	* Note that for Linux/Mac user: need to chmod +x for play-1.2.4/play
 * Import existing project in Eclipse: import the AgentMaster folder.

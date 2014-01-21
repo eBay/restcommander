@@ -8,7 +8,7 @@ Please check details about REST Superman at [www.restsuperman.com](http://www.re
 
 Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction.
 
-So what can Superman do?  It speaks HTTP in scale, thus is powerful with many use cases. Here are some basic ones for automation on managing and monitoring tens of thousands web servers:
+So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html):
 
 * **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Superman can get this done for you in an hour.
 * **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Superman is your perfect choice.  
@@ -30,7 +30,7 @@ So what can Superman do?  It speaks HTTP in scale, thus is powerful with many us
 * **Remediation Automation**: If your config change requests are idepotent, Superman can easily ensure correct config by scheduled config pushes.
 
 
-###Run Instructions
+###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)
 
 #### Directly Under Windows/Linux With Zero Installation: 
 * Assuming have Java (JDK or most time just JRE) pre-installed.
@@ -97,6 +97,6 @@ Design and implement a user friendly and generic REST client able to conduct eff
 
 
 * Improve REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single node POSTMAN or sequential executed none-generic shell scripts.
-* Enable any uniform or node-specific REST (GET/POST/PUT/DELETE) calls to nodes for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousand of server's management and software pool management.
+* Enable any uniform or node-specific REST (GET/POST/PUT/DELETE) calls to nodes for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
 * Innovation: After reviewing related work, we are not aware of any existing publication or open source software did the same thing. 
 

@@ -27,7 +27,7 @@ So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many u
 * **N Requests to 1 Target**: Concurrently fire a large number of different requests to a single target server. E.g. look up thousands of jobs status in a server. Concurrency control to accommodate server capacity.
 * **IT Orchestration**: Scalable multi-step HTTP work flows to thousands of HTTP endpoints.
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
-* **Remediation Automation**: If your config change requests are idepotent, Superman can easily ensure correct config by scheduled config pushes.
+* **Remediation Automation**: If your config change requests are idempotent, Superman can easily ensure correct config by scheduled config pushes.
 
 
 ###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)

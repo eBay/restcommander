@@ -8,7 +8,7 @@ Please check details about REST Superman at [www.restsuperman.com](http://www.re
 
 Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction.
 
-So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html):
+So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
 
 * **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Superman can get this done for you in an hour.
 * **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Superman is your perfect choice.  

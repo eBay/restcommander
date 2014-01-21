@@ -37,7 +37,7 @@ So what can Superman do?  It speaks HTTP in scale, thus is powerful with many us
 
 ##### WINDOWS
 * double click: start_application_win.bat . Just close the window to shutdown the server. 
-* Then open brower: http://localhost:9000/
+* Then open browser: [localhost:9000](http://localhost:9000/)
 * After shutdown the application: double click: clean_application_pid_after_run_win.bat
 
 ##### LINUX or MAC
@@ -51,7 +51,7 @@ So what can Superman do?  It speaks HTTP in scale, thus is powerful with many us
 * Import existing project in Eclipse: import the AgentMaster folder.
 * Compile errors? Try rebuild and clean: (menu: Project->Clean->Clean all projects
 * Run application: under "eclipse" folder: AgentMaster.launch : run as AgentMaster
-* Then open brower: http://localhost:9000/
+* Then open browser: [localhost:9000](http://localhost:9000/)
 
 
 ### Settings

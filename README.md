@@ -1,4 +1,4 @@
-[REST Superman](http://www.restsuperman.com): Parallel Async HTTP client
+[REST Superman](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
 ===========
 Please check details about REST Superman at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE).
 
@@ -6,7 +6,7 @@ Please check details about REST Superman at [www.restsuperman.com](http://www.re
 
 ###What is REST Superman and Why I need it?
 
-Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client with aggregated response and regular expression based string extraction.
+Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction.
 
 So what can Superman do?  It speaks HTTP in scale, thus is powerful with many use cases. Here are some basic ones for automation on managing and monitoring tens of thousands web servers:
 
@@ -16,7 +16,6 @@ So what can Superman do?  It speaks HTTP in scale, thus is powerful with many us
 
 
 ###Highlights
-Generic, fast HTTP/REST client sending requests to 1000 nodes with response aggregation in 10 seconds.
 
 * **Scalable and Fast**: Utilizes AKKA and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.

@@ -1,12 +1,12 @@
 [REST Superman](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
 ===========
-Please check details about REST Superman at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE).
+Please check latest details about REST Superman at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 
 ###What is REST Superman and Why I need it?
 
-Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction.
+Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
 So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
 
@@ -83,13 +83,10 @@ REST API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current 
 
 Design and implement a user friendly and generic REST client able to conduct efficient REST calls to a large amount of nodes in parallel with uniform or node-specific requests and aggregated response analysis. 
 
-####SLA Objective: 
-* <5 minutes for REST requests to up to 10,000 nodes in parallel.
-* <1 minute for REST requests to up to 200 nodes in parallel.
-
 ####Current SLA: 
 * Measured from superman running a single server
 * 1000 servers request and all responses obtained in 7 seconds 
+* 10,000 servers request and all responses obtained in 48 seconds
 * 20,000 servers request and all responses obtained in 70 seconds
 
 

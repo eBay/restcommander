@@ -15,8 +15,8 @@ Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel asyn
 
 So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
 
-* **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Superman can get this done for you in an hour.
-* **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Superman is your perfect choice.  
+* **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Commander can get this done for you in an hour.
+* **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Commander is your perfect choice.  
 * **HTTP web server management work flows combining the above 2**: e.g., discover unhealthy webservers and then conduct operations (restart, config push) to them.
 
 
@@ -50,7 +50,7 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * Run start_application_linux.sh
 
 #### Run/Debug With Eclipse:
-* Clone project in Git from: https://github.com/eBay/restsuperman
+* Clone project in Git from: https://github.com/eBay/restcommander
 * Extract to a folder, e.g., S:\GitSources\AgentMaster\AgentMaster. In command line run: S:\GitSources\AgentMaster\AgentMaster>play-1.2.4\play eclipsify AgentMaster
 	* Note that for Linux/Mac user: need to chmod +x for play-1.2.4/play
 * Import existing project in Eclipse: import the AgentMaster folder.
@@ -89,7 +89,7 @@ REST API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current 
 Design and implement a user friendly and generic REST client able to conduct efficient REST calls to a large amount of nodes in parallel with uniform or node-specific requests and aggregated response analysis. 
 
 ####Current SLA: 
-* Measured from superman running a single server
+* Measured from superman running on a single server
 * 1000 servers request and all responses obtained in 7 seconds 
 * 10,000 servers request and all responses obtained in 48 seconds
 * 20,000 servers request and all responses obtained in 70 seconds

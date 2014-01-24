@@ -37,7 +37,7 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **Remediation Automation**: If your config change requests are idempotent, Superman can easily ensure correct config by scheduled config pushes.
 
 ###Current SLA
-* Measured from Commander running a single server
+* Measured from Commander running on a single server
 * 1000 servers request and all responses obtained in 7 seconds 
 * 10,000 servers request and all responses obtained in 48 seconds
 * 20,000 servers request and all responses obtained in 70 seconds

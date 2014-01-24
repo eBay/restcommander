@@ -7,6 +7,8 @@
 
 Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
+REST Commander has been ranked as a **Top 10** (8th) daily trending repositories in global GitHub (all languages) on 01/21/2014 and 01/22/2014 upon submitted in Hacker News [(Screenshot)](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/rest-superman-rank-8th-global-github.jpg).
+
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 
 ###What is REST Commander and Why I need it?

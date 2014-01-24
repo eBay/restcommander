@@ -106,3 +106,7 @@ Design and implement a user friendly and generic REST client able to conduct eff
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/eBay/restsuperman/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/eBay/restcommander/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

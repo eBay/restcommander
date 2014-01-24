@@ -1,14 +1,19 @@
-[REST Superman](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
+[REST Commander](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
 ===========
-Please check latest details about REST Superman at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+
+**Formerly known as REST Superman**
+
+**[NOTICE - NEW NAME, SAME CODE and SUPER POWER]**: Due to the attracted attention and increased popularity, our legal department further inspected the project and would like a minor change on the naming and some logo. Therefore, we now change the new name of the project to be **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
+
+Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 
-###What is REST Superman and Why I need it?
+###What is REST Commander and Why I need it?
 
-Superman is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
+Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
-So what can Superman do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
+So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
 
 * **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Superman can get this done for you in an hour.
 * **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Superman is your perfect choice.  
@@ -73,7 +78,7 @@ Key files are under *conf* folder
 
 
 
-### About REST-Superman
+### About REST-Commander
 
 ####Motivation: 
 

@@ -97,3 +97,7 @@ Design and implement a user friendly and generic REST client able to conduct eff
 * Enable any uniform or node-specific REST (GET/POST/PUT/DELETE) calls to nodes for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
 * Innovation: After reviewing related work, we are not aware of any existing publication or open source software did the same thing. 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/eBay/restsuperman/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

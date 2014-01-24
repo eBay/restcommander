@@ -3,7 +3,7 @@
 
 **Formerly known as REST Superman**
 
-**[NOTICE - NEW NAME, SAME CODE and SUPER POWER]**: Due to the attracted attention and increased popularity, our legal department further inspected the project and would like a minor change on the naming and some logo. Therefore, we now change the new name of the project to be **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
+**[NOTICE - NEW NAME, SAME CODE and SCALABILITY]**: With increased popularity, our legal department further inspected the project and would like a minor change on the naming and some logo. We now change the project name to be **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
 Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 

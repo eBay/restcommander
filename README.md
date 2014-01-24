@@ -7,7 +7,7 @@
 
 Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
-REST Commander has been ranked as a **Top 10** (8th) daily trending repositories in global GitHub (all languages) on 01/21/2014 and 01/22/2014 upon submitted in Hacker News [(Screenshot)](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/rest-superman-rank-8th-global-github.jpg).
+REST Commander has been ranked as a **Top 10** (8th) daily trending repositories in global GitHub by all languages on 01/21/2014 and 01/22/2014 [(screenshot)](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/rest-superman-rank-8th-global-github.jpg),  upon featured in Hacker News after release.
 
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 
@@ -36,6 +36,11 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Superman can easily ensure correct config by scheduled config pushes.
 
+###Current SLA
+* Measured from Commander running a single server
+* 1000 servers request and all responses obtained in 7 seconds 
+* 10,000 servers request and all responses obtained in 48 seconds
+* 20,000 servers request and all responses obtained in 70 seconds
 
 ###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)
 
@@ -84,26 +89,21 @@ Key files are under *conf* folder
 
 ####Motivation: 
 
-REST API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current platform and services. However, efficient REST calls to multiple nodes in parallel with node-specific requests and aggregated response analysis are still challenging.
+REST API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current platform and services. However, efficient REST calls to multiple servers in parallel with server-specific requests and aggregated response analysis are still challenging.
 
 ####Problem Statement:
 
 Design and implement a user friendly and generic REST client able to conduct efficient REST calls to a large amount of nodes in parallel with uniform or node-specific requests and aggregated response analysis. 
 
-####Current SLA: 
-* Measured from superman running a single server
-* 1000 servers request and all responses obtained in 7 seconds 
-* 10,000 servers request and all responses obtained in 48 seconds
-* 20,000 servers request and all responses obtained in 70 seconds
+
 
 
 ####Impact
 
 
 * Improve REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single server POSTMAN or sequential executed none-generic shell scripts.
-* Enable any uniform or server-specific REST (GET/POST/PUT/DELETE) calls to nodes for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
-* **Innovation**: After reviewing related work, we are not aware of any existing publication or open source software did the same thing. 
-
+* Enable any uniform or server-specific REST (GET/POST/PUT/DELETE) calls to servers for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
+* **Innovation**: After throughly reviewing related work of Postman, Apache Bench,  Typhoeus and many other publication or tools, we are not aware of any existing ones are able to achieve the same speed, scale and functionality of generic response aggregation.
 
 
 

@@ -1,13 +1,13 @@
 [REST Commander](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
 ===========
 
-**Formerly known as REST Superman**
+**Formerly known as REST Superman** Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
-**NOTICE** - NEW NAME, SAME CODE and SCALABILITY: With increased popularity, our legal department further inspected the project and would like a minor change on the naming and some logo. We now change the project name to be **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
+**NOTICE** - NEW NAME, SAME CODE and SCALABILITY: With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. No worry, all the code and functions will remain the same with a smooth transition. 2014/01/23
 
-Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
-REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/rest-superman-rank-8th-global-github.jpg),  upon featured in Hacker News after release. 
+
+REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/rest-superman-rank-8th-global-github.jpg),  upon featured in Hacker News after release. The largest open source community in China [oschina](http://www.oschina.net/p/restsuperman) has featured and "recommended" REST Commander ([url](http://www.oschina.net/p/restsuperman)).
 
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 

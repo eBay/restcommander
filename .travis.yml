@@ -1,6 +1,8 @@
 language: java
 env:
   - PLAY_VERSION=1.2.4
+before_script:
+  - chmod +x play-${PLAY_VERSION}/play
 script: play-${PLAY_VERSION}/play precompile AgentMaster; play-${PLAY_VERSION}/play auto-test AgentMaster
 #-Dprecompiled=true
 #script: sbt test AgentMaster

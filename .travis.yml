@@ -1,9 +1,6 @@
 language: java
 env:
   - PLAY_VERSION=1.2.4
-before_script:
-  - wget http://downloads.typesafe.com/releases/play-${PLAY_VERSION}.zip
-  - unzip -oq play-${PLAY_VERSION}.zip
 script: play-${PLAY_VERSION}/play precompile AgentMaster; play-${PLAY_VERSION}/play auto-test AgentMaster
 #-Dprecompiled=true
 #script: sbt test AgentMaster

@@ -9,7 +9,7 @@
 
 REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restsuperman.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. 
 
-REST Commander has been recommended and listed in **Top 20** Hottest software of today in [oschina](http://www.oschina.net/p/restsuperman) (开源中国 今日热门软件Top20), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restsuperman.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restsuperman))
+REST Commander has been recommended and listed in **Top 20** Hottest software of today in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restsuperman.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restsuperman))
 
 ![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
 

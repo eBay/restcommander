@@ -1,7 +1,9 @@
 [REST Commander](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
 ===========
 
-**Formerly known as REST Superman** Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). https://api.travis-ci.org/eBay/restcommander.png?branch=master
+**Formerly known as REST Superman** Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+
+![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 
 **NOTICE** - NEW NAME, SAME CODE and SCALABILITY: With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 

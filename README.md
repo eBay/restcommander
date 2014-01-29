@@ -1,7 +1,7 @@
-[REST Commander](http://www.restsuperman.com): Parallel Async HTTP Client as a Service
+[REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service
 ===========
 
-**Formerly known as REST Superman** Please check latest details about REST Commander at [www.restsuperman.com](http://www.restsuperman.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+**Formerly known as REST Superman**. Please check latest details about REST Commander at [www.restcommander.com](http://www.restcommander.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
 ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 
@@ -9,17 +9,17 @@
 
 
 
-REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restsuperman.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. 
+REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restcommander.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. 
 
-REST Commander has been recommended and listed in **Top 20** Hottest software of today in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restsuperman.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restsuperman))
+REST Commander has been recommended and listed in **Top 20** Hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restcommander.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restcommander))
 
-![Structure Overview](https://github.com/ebay/restsuperman/raw/master/AgentMaster/public/images/workflow_v3.png)
+![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 
 ###What is REST Commander and Why I need it?
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
-So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restsuperman.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restsuperman.com/monitoring-sample.html)):
+So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html)):
 
 * **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Commander can get this done for you in an hour.
 * **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Commander is your perfect choice.  
@@ -35,13 +35,13 @@ Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,00
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
 * **Generic**: Generic HTTP request. Generic response aggregation with user-defined regular expression matching. Generic variable replacement in request templates for node specific requests.
 * **Ready to Use**: Agility. Zero installation required. Changing requests and target servers with breeze. No database setup. Run locally in a single click.
-* **User Friendly**: Build in Java with Play Framework, Bootstrap and its Application Wizard, Superman enables sending requests in both easy-to-use web UI wizards and powerful REST APIs.
+* **User Friendly**: Build in Java with Play Framework, Bootstrap and its Application Wizard, Commander enables sending requests in both easy-to-use web UI wizards and powerful REST APIs.
 * **Agent-less Monitoring**: Quickly check any HTTP results from an ad hoc list of servers with generic response aggregation by regular expression matching. FAST: No dependency or setup required. 
 * **Config Pushes**: Push uniform config or node-specific configs to HTTP end points, as long as there are HTTP (REST/SOAP) APIs to perform.
 * **N Requests to 1 Target**: Concurrently fire a large number of different requests to a single target server. E.g. look up thousands of jobs status in a server. Concurrency control to accommodate server capacity.
 * **IT Orchestration**: Scalable multi-step HTTP work flows to thousands of HTTP endpoints.
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
-* **Remediation Automation**: If your config change requests are idempotent, Superman can easily ensure correct config by scheduled config pushes.
+* **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
 
 ###Current SLA
 * Measured from Commander running on a single server

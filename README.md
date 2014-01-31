@@ -15,7 +15,7 @@ REST Commander has been **ranked  8th** in Github trending (hottest projects in 
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 
-###What is REST Commander and Why I need it?<a id="a_whatAndWhy"></a>
+###What is REST Commander and Why I need it?<a name="a_whatAndWhy"></a>
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
@@ -26,7 +26,7 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **HTTP web server management work flows combining the above 2**: e.g., discover unhealthy webservers and then conduct operations (restart, config push) to them.
 
 
-###Highlights<a id="a_highlights"></a>
+###Highlights<a name="a_highlights"></a>
 
 * **Scalable and Fast**: Utilizes AKKA and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
@@ -40,14 +40,14 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
 
-###Performance (SLA)<a id="a_performance"></a>
+###Performance (SLA)<a name="a_performance"></a>
 * Measured from Commander running on a **single off-the-shelf server**.
 * 1000 servers requests and all responses aggregated in 7 seconds 
 * 10,000 servers requests and all responses aggregated in 48 seconds
 * 20,000 servers requests and all responses aggregated in 70 seconds
 * 20,000 is far less than the maximum scale we tested and it never crashed. We have not been able to find the scalability limit. :-) 
 
-###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a id="a_runInstructions"></a>
+###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a name="a_runInstructions"></a>
 
 #### Directly Under Windows/Linux With Zero Installation: 
 * Assuming have Java (JDK or most time just JRE) pre-installed.

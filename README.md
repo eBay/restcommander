@@ -1,21 +1,21 @@
-[REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service
+[REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman**. Please check latest details about REST Commander at [www.restcommander.com](http://www.restcommander.com) and its [introduction video](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**introduction video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
-![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
+Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
+
+[What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
 **NOTICE** - NEW NAME, SAME CODE and SCALABILITY: With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
 
 
-REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restcommander.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. 
-
-REST Commander has been recommended and listed in **Top 20** Hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restcommander.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restcommander))
+REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restcommander.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. It has been recommended and listed in **Top 20** hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restcommander.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restsuperman))
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 
-###What is REST Commander and Why I need it?
+###What is REST Commander and Why I need it?<a id="a_whatAndWhy"></a>
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
@@ -26,10 +26,7 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **HTTP web server management work flows combining the above 2**: e.g., discover unhealthy webservers and then conduct operations (restart, config push) to them.
 
 
-###Highlights
-
-Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. 
-Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
+###Highlights<a id="a_highlights"></a>
 
 * **Scalable and Fast**: Utilizes AKKA and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
@@ -43,13 +40,14 @@ Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,00
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
 
-###Current SLA
-* Measured from Commander running on a single server
-* 1000 servers request and all responses obtained in 7 seconds 
-* 10,000 servers request and all responses obtained in 48 seconds
-* 20,000 servers request and all responses obtained in 70 seconds
+###Performance (SLA)<a id="a_performance"></a>
+* Measured from Commander running on a **single off-the-shelf server**.
+* 1000 servers requests and all responses aggregated in 7 seconds 
+* 10,000 servers requests and all responses aggregated in 48 seconds
+* 20,000 servers requests and all responses aggregated in 70 seconds
+* 20,000 is far less than the maximum scale we tested and it never crashed. We have not been able to find the scalability limit. :-) 
 
-###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)
+###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a id="a_runInstructions"></a>
 
 #### Directly Under Windows/Linux With Zero Installation: 
 * Assuming have Java (JDK or most time just JRE) pre-installed.
@@ -96,19 +94,19 @@ Key files are under *conf* folder
 
 ####Motivation: 
 
-REST API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current platform and services. However, efficient REST calls to multiple servers in parallel with server-specific requests and aggregated response analysis are still challenging.
+REST and SOAP API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current platform and services. However, efficient REST / SOAP calls to multiple servers in parallel with server-specific requests and aggregated response analysis are still challenging.
 
 ####Problem Statement:
 
-Design and implement a user friendly and generic REST client able to conduct efficient REST calls to a large amount of nodes in parallel with uniform or node-specific requests and aggregated response analysis. 
+Design and implement a user friendly and generic HTTP client able to conduct efficient REST calls to a large amount of servers in parallel with uniform or server-specific requests and aggregated response analysis. 
 
 
 ####Impact
 
 
-* Improve REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single server POSTMAN or sequential executed none-generic shell scripts.
+* Improve HTTP/SOAP/REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single server POSTMAN or sequential executed none-generic shell scripts.
 * Enable any uniform or server-specific REST (GET/POST/PUT/DELETE) calls to servers for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
-* **Innovation**: After thoroughly reviewing related work of Postman, Apache Bench,  Typhoeus and many other publication or tools, we are not aware of any existing ones are able to achieve the same speed, scale and functionality of generic response aggregation.
+* **Innovation**: After thoroughly reviewing related work of Postman, JMeter, Gatling, Apache Bench,  Typhoeus and many other publication or tools, we are not aware of any existing ones are able to achieve the same speed, scale and functionality of generic response aggregation.
 
 
 

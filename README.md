@@ -1,32 +1,34 @@
 [REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**introduction video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+**Formerly known as REST Superman[*](#a_new_name)**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
 Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
+<a name="a_new_name"></a>
+*** NOTICE** With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
-**NOTICE** - NEW NAME, SAME CODE and SCALABILITY: With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
 
-
-REST Commander has been **ranked  8th** in Github trending (hottest projects in global Github in all languages) on 01/21/2014 and 01/22/2014 [(screenshot)](http://www.restcommander.com/public/images/superman-8th-github-trending.png),  upon featured in Hacker News after release. It has been recommended and listed in **Top 20** hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China on 01/26/2014.  [(screenshot](http://www.restcommander.com/public/images/superman-top-20-oschina.png),[url](http://www.oschina.net/p/restsuperman))
+REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China. 
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
-
-###What is REST Commander and Why I need it?<a name="a_whatAndWhy"></a>
+<a name="a_whatAndWhy"></a>
+###What is REST Commander and Why I need it?
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
-So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html)):
+So what can Commander do?  It speaks HTTP at scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html))
+
+Whenever comes to sending multiple HTTP requests in parallel, federated data aggregation or scalable task executions on HTTP, **Think Commander First**.
 
 * **Monitor HTTP web servers**:  are you a company who have 50-5,000 web servers (e.g. tomcat, nginx, etc... ) running;  and want to check every minute which servers are slow or misconfigured? Commander can get this done for you in an hour.
 * **Config push to HTTP web servers**: If your servers use REST/SOAP APIs to update its config and you want to enforce server-specific or uniform config on demand or with auto-remediation. Commander is your perfect choice.  
 * **HTTP web server management work flows combining the above 2**: e.g., discover unhealthy webservers and then conduct operations (restart, config push) to them.
+<a name="a_highlights"></a>
 
-
-###Highlights<a name="a_highlights"></a>
+###Highlights
 
 * **Scalable and Fast**: Utilizes AKKA and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
@@ -39,8 +41,8 @@ So what can Commander do?  It speaks HTTP in scale, thus is powerful with [many 
 * **IT Orchestration**: Scalable multi-step HTTP work flows to thousands of HTTP endpoints.
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
-
-###Performance (SLA)<a name="a_performance"></a>
+<a name="a_performance"></a>
+###Performance (SLA)
 * Measured from Commander running on a **single off-the-shelf server**.
 * 1000 servers requests and all responses aggregated in 7 seconds 
 * 10,000 servers requests and all responses aggregated in 48 seconds

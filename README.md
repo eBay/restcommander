@@ -8,7 +8,7 @@ Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
 <a name="a_new_name"></a>
-* With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
+_*NOTICE_ With increased popularity, our legal department further inspected the project and would like a minor change on the name. The project name is now changed to **REST Commander**. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
 
 

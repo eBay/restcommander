@@ -1,7 +1,7 @@
 [REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman[*](#a_new_name)**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+**Formerly known as REST Superman[ *](#a_new_name)**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
 
 Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
@@ -43,6 +43,7 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 * **IT Orchestration**: Scalable multi-step HTTP work flows to thousands of HTTP endpoints.
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
+
 <a name="a_performance"></a>
 ###Performance (SLA)
 * Measured from Commander running on a **single off-the-shelf server**.

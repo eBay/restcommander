@@ -103,7 +103,7 @@ REST and SOAP API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in
 
 ####Problem Statement:
 
-Design and implement a user friendly and generic HTTP client able to conduct efficient REST calls to a large amount of servers in parallel with uniform or server-specific requests and aggregated response analysis. 
+Design and implement a user friendly and generic HTTP client able to conduct efficient HTTP calls to a large amount of servers in parallel with uniform or server-specific requests and aggregated response analysis. 
 
 
 ####Impact

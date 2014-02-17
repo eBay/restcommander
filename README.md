@@ -13,7 +13,7 @@ Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,
 
 
 
-REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** hottest software of today in [oschina](http://www.oschina.net/p/restcommander), the largest open source community in China. 
+REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** hottest software of today in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. 
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 <a name="a_whatAndWhy"></a>
@@ -43,6 +43,8 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 * **IT Orchestration**: Scalable multi-step HTTP work flows to thousands of HTTP endpoints.
 * **Discover Outliers**: Discover misconfigured servers from thousands of servers with http APIs in no time.
 * **Remediation Automation**: If your config change requests are idempotent, Commander can easily ensure correct config by scheduled config pushes.
+
+Commander is powerful to send (1) the same request to different servers; (2) different requests to different servers; (3) different requests to the same server. Why we need them? Check out these [live examples](http://www.restcommander.com/usecase.html) on (1) monitor websites; (2) poll job status (3) call the same weather WSDL web service with different zip codes.
 
 <a name="a_performance"></a>
 ###Performance (SLA)

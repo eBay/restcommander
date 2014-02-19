@@ -9,7 +9,7 @@ Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,
 
 <a name="a_new_name"></a>
 
-**\* NOTICE** With increased popularity, our legal department further inspected the project and would like a minor change on the name. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
+**\* NOTICE** With increased popularity, we would like a minor change on the name. We will ensure a smooth transition. No worry, all the code and functions will remain the same. 2014/01/23
 
 
 

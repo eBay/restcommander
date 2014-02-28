@@ -36,7 +36,7 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
 * **Generic**: Generic HTTP request. Generic response aggregation with user-defined regular expression matching. Generic variable replacement in request templates for node specific requests.
 * **Ready to Use**: Agility. Zero installation required. Changing requests and target servers with breeze. No database setup. Run locally in a single click.
-* **User Friendly**: Build in Java with Play Framework, Bootstrap and its Application Wizard, Commander enables sending requests in both easy-to-use web UI wizards and powerful REST APIs.
+* **User Friendly**: Build in Java with Play Framework, Bootstrap and its Application Wizard, Commander enables sending requests in both easy-to-use web UI wizards and powerful REST APIs. Define ad hoc requests, target servers and the regex aggregation rule in a single REST call.
 * **Agent-less Monitoring**: Quickly check any HTTP results from an ad hoc list of servers with generic response aggregation by regular expression matching. FAST: No dependency or setup required. 
 * **Config Pushes**: Push uniform config or node-specific configs to HTTP end points, as long as there are HTTP (REST/SOAP) APIs to perform.
 * **N Requests to 1 Target**: Concurrently fire a large number of different requests to a single target server. E.g. look up thousands of jobs status in a server. Concurrency control to accommodate server capacity.

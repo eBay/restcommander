@@ -9,7 +9,7 @@ Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,
 
 
 
-REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** hottest software of today in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. 
+REST Commander has been **[ranked  8th]/10 Millions+ (http://www.restcommander.com/public/images/superman-8th-github-trending.png)** in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending of today out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. 
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 <a name="a_whatAndWhy"></a>

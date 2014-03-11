@@ -1,7 +1,7 @@
 [REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  about REST Commander at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). 
+**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) and [simple concurrency and throttling design in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
 
 Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
@@ -28,7 +28,7 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 
 ###Highlights
 
-* **Scalable and Fast**: Utilizes AKKA and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
+* **Scalable and Fast**: Utilizes Akka and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
 * **Generic**: Generic HTTP request. Generic response aggregation with user-defined regular expression matching. Generic variable replacement in request templates for node specific requests.
 * **Ready to Use**: Agility. Zero installation required. Changing requests and target servers with breeze. No database setup. Run locally in a single click.

@@ -28,6 +28,12 @@ import models.asynchttp.NingClientFactory;
  */
 public class VarUtils {
 	
+	
+	//20140314: must use 
+	// POTENTIAL BUG: CANNOT USE LOCATION THAT IS +XX00; MUST USE -XX00 ; since + must be URL encoded.
+	public static String STR_LOG_TIME_ZONE =ConfUtils.getStrFromApplicationConfVarValue("LOG_TIME_ZONE");    
+			//"America/New_York";
+	
 	//20140102: for using logger or not. even use it; may redirect to systemout
 	public static boolean useLogger = true;
 	

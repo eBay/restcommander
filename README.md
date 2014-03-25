@@ -113,5 +113,3 @@ Design and implement a user friendly and generic HTTP client able to conduct eff
 
 
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/eBay/restcommander/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

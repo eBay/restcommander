@@ -62,7 +62,7 @@ Commander is powerful to send (1) the same request to different servers; (2) dif
 
 ##### LINUX or MAC
 * Note that for Linux/Mac user: need to chmod +x for play-1.2.4/play
-	sh /home/user/RestCommander/start_application_linux_or_mac.sh start
+* sh /home/user/RestCommander/start_application_linux_or_mac.sh start
 
 #### Run/Debug With Eclipse:
 * Clone project in Git from: https://github.com/eBay/restcommander

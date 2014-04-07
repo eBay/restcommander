@@ -1,15 +1,15 @@
 [REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code and REST APIs  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) and [simple concurrency and throttling design in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
+**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code, REST APIs, and demos  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). What's new? Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) on efficient HTTP clients and  [concurrency and throttling model in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
 
-Fast Parallel Async HTTP/REST/SOAP client as a service to monitor and manage 10,000 web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
+Rest Commander is a fast parallel async HTTP/REST/SOAP client as a service to monitor and manage 10,000s of web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
 
 
-REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. 
+REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 <a name="a_whatAndWhy"></a>
@@ -48,7 +48,7 @@ Commander is powerful to send (1) the same request to different servers; (2) dif
 * 1000 servers requests and all responses aggregated in 7 seconds 
 * 10,000 servers requests and all responses aggregated in 48 seconds
 * 20,000 servers requests and all responses aggregated in 70 seconds
-* 20,000 is far less than the maximum scale we tested and it never crashed. We have not been able to find the scalability limit. :-) 
+* 20,000 is far less than the maximum scale we tested and it is stable for months. We have not been able to find the scalability limit. :-) 
 
 ###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a name="a_runInstructions"></a>
 

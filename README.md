@@ -1,7 +1,7 @@
 [REST Commander](http://www.restcommander.com): Parallel Async HTTP Client as a Service ![Travis status](https://api.travis-ci.org/eBay/restcommander.png?branch=master)
 ===========
 
-**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code, REST APIs, and demos  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](http://www.youtube.com/watch?v=nMFhXxyE0EE). What's new? Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) on efficient HTTP clients and  [concurrency and throttling model in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
+**Formerly known as REST Superman**. Please check detail instructions, screenshots, documentations, sample code, REST APIs, and demos  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](https://www.youtube.com/watch?v=13rOXCX2dt8). What's new? Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) on efficient HTTP clients and  [concurrency and throttling model in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
 
 Rest Commander is a fast parallel async HTTP/REST/SOAP client as a service to monitor and manage 10,000s of web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
@@ -110,6 +110,4 @@ Design and implement a user friendly and generic HTTP client able to conduct eff
 * Improve HTTP/SOAP/REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single server POSTMAN or sequential executed none-generic shell scripts.
 * Enable any uniform or server-specific REST (GET/POST/PUT/DELETE) calls to servers for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
 * **Innovation**: After thoroughly reviewing related work of Postman, JMeter, Gatling, Apache Bench,  Typhoeus and many other publication or tools, we are not aware of any existing ones are able to achieve the same speed, scale and functionality of generic response aggregation.
-
-
 

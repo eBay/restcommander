@@ -17,7 +17,7 @@ REST Commander has been **[ranked  8th](http://www.restcommander.com/public/imag
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
 
-So what can Commander do?  It speaks HTTP at scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html))
+So what can Commander do?  It speaks HTTP at scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html)). Commander itself is also ¡°as a service¡±: with its powerful REST API, you can define ad-hoc target servers, an HTTP request template, variable replacement, and a regular expression all in a single call. 
 
 Whenever comes to sending multiple HTTP requests in parallel, federated data aggregation or scalable task executions on HTTP, **Think Commander First**.
 

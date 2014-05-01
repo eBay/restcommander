@@ -114,7 +114,7 @@ Design and implement a user friendly and generic HTTP client able to conduct eff
 
 ### REST API Example
 
-An example of uniform request to 3 target servers. In this example, the command and aggregation rule has been pre-defined.
+REST Commander supports both intuitive step-by-step wizards and REST APIs. Here is an simple example of uniform request to 3 target servers. In this example, the command and aggregation rule have been pre-defined. More complex API examples using none pre-defined command or aggregation rules can be found [here](http://www.restcommander.com/usecase.html).
 
 Request: (assuming Commander runs on localhost:9000)
 

@@ -120,6 +120,7 @@ Request: (assuming Commander runs on localhost:9000)
 
 HTTP POST to:	http://localhost:9000/commands/genUpdateSendCommandWithReplaceVarMapAdhocJson
 POST Body:
+
 	{
 	   "targetNodes":[
 		  "www.restcommander.com",

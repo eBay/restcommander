@@ -111,3 +111,61 @@ Design and implement a user friendly and generic HTTP client able to conduct eff
 * Enable any uniform or server-specific REST (GET/POST/PUT/DELETE) calls to servers for periodical monitoring and configuration pushes in a simple UI with fast and reliable with responses aggregation. Automate tens of thousands of server's management and software pool management.
 * **Innovation**: After thoroughly reviewing related work of Postman, JMeter, Gatling, Apache Bench,  Typhoeus and many other publication or tools, we are not aware of any existing ones are able to achieve the same speed, scale and functionality of generic response aggregation.
 
+
+### REST API Example
+
+An example of uniform request to 3 target servers. In this example, the command and aggregation rule has been pre-defined.
+
+Request: (assuming Commander runs on localhost:9000)
+
+HTTP POST to:	http://localhost:9000/commands/genUpdateSendCommandWithReplaceVarMapAdhocJson
+POST Body:
+	{
+	   "targetNodes":[
+		  "www.restcommander.com",
+		  "www.jeffpei.com",
+		  "www.yangli907.com"
+	   ],
+	  
+	  "useNewAgentCommand":"false",
+	  "agentCommandType":"GET_VALIDATE_INTERNALS",
+	   "willAggregateResponse":true,
+	   "useNewAggregation":false,
+	   "aggregationType":"PATTERN_VI_SERVER_CPU",
+	   "replacementVarMap":{}
+	}	
+
+Response:
+
+	{
+		"aggregationMap": {
+			"23.54": "1",
+			"27.08": "1",
+			"7.08": "1"
+		},
+		"aggregationValueToNodesList": [
+			{
+				"value": "23.54",
+				"nodeList": [
+					"www.yangli907.com"
+				],
+				"isError": false
+			},
+			{
+				"value": "27.08",
+				"nodeList": [
+					"www.jeffpei.com"
+				],
+				"isError": false
+			},
+			{
+				"value": "7.08",
+				"nodeList": [
+					"www.restcommander.com"
+				],
+				"isError": false
+			}
+		]
+	}
+
+	

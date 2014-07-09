@@ -3,7 +3,9 @@
 
 Formerly known as REST Superman. **Fire thousands of HTTP requests and aggregate responses in a couple of clicks in seconds**. Please check detail instructions, screenshots, documentations, sample code, REST APIs, and demos  at [**www.restcommander.com**](http://www.restcommander.com) and its [**demo video**](https://www.youtube.com/watch?v=13rOXCX2dt8). What's new? Check [related work review](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#relatedwork) on efficient HTTP clients and  [concurrency and throttling model in Akka](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring#akka) at [**eBay tech blog**](http://www.ebaytechblog.com/2014/03/11/rest-commander-scalable-web-server-management-and-monitoring).
 
-Rest Commander is a fast parallel async HTTP/REST/SOAP client as a service to monitor and manage 10,000s of web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
+REST Commander is a fast parallel async HTTP/REST/SOAP client as a service to monitor and manage 10,000s of web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
+
+REST Commander serves as the agent master of [cronus agent (open sourced)](https://github.com/eBay/cronusagent) for scalable software deployment, script execution, config push, and monitoring. 
 
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 

@@ -9,6 +9,7 @@ REST Commander serves as the agent master of [cronus agent (open sourced)](https
 
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
+Recent Activities: [20140722](https://github.com/eBay/restcommander/wiki/Recent-Activities-20140722)
 
 
 REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).

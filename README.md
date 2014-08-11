@@ -9,16 +9,16 @@ REST Commander serves as the agent master of [cronus agent (open sourced)](https
 
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
-Recent Activities: [20140722](https://github.com/eBay/restcommander/wiki/Recent-Activities-20140722)
+Recent Activities: [20140722](https://github.com/eBay/restcommander/wiki/Recent-Activities-20140722). We are able to horizontally scale Commander with Akka Clustering (pending release).
 
 
-REST Commander has been **[ranked  8th](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github trending in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).
+REST Commander has been in **[top 10 trending](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
 <a name="a_whatAndWhy"></a>
 ###What is REST Commander and Why I need it?
 
-Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with AKKA and Play Framework).
+Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with Akka and Play Framework).
 
 So what can Commander do?  It speaks HTTP at scale, thus is powerful with [many use cases](http://www.restcommander.com/usecase.html). Here are some basic ones for automation on managing and monitoring tens of thousands web servers (See [Sample Code](http://www.restcommander.com/monitoring-sample.html)). Commander itself is also "as a service": with its powerful REST API, you can define ad-hoc target servers, an HTTP request template, variable replacement, and a regular expression all in a single call. 
 

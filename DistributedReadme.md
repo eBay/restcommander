@@ -83,7 +83,7 @@ All APIs can use both GET and POST.  All old version APIs of REST Commander also
 * Request:
 ```json
 {
-  "nodeGroupType": "RAPTOR_ALL", 
+  "nodeGroupType": "node_list", 
   "agentCommandType": "GET_VI",
   "localMode": false,
   "failOver": true,
@@ -133,7 +133,7 @@ All APIs can use both GET and POST.  All old version APIs of REST Commander also
   "collectedNum": 40000,
   "maxConcNum": 2000,
   "jobId": "6c4b8302-4370-46c1-a4ab-008c1e1ddddd",
-  "nodeGroupType": "RAPTOR_ALL",
+  "nodeGroupType": "node_List",
   "agentCommandType": "GET_VI"
 }
 ```
@@ -173,7 +173,7 @@ All APIs can use both GET and POST.  All old version APIs of REST Commander also
 	  "collectedNum": 40000,
 	  "maxConcNum": 2000,
 	  "jobId": "6c4b8302-4370-46c1-a4ab-008c1e1ddddd",
-	  "nodeGroupType": "RAPTOR_ALL",
+	  "nodeGroupType": "NODE_LIST",
 	  "agentCommandType": "GET_VI"
 	},
 	{
@@ -205,7 +205,7 @@ All APIs can use both GET and POST.  All old version APIs of REST Commander also
 	  "collectedNum": 40000,
 	  "maxConcNum": 2000,
 	  "jobId": "59d23705-e420-4f74-8972-ea55955be752",
-	  "nodeGroupType": "RAPTOR_ALL",
+	  "nodeGroupType": "NODE_LIST",
 	  "agentCommandType": "GET_VI"
 	}
 ]

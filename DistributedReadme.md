@@ -1,7 +1,7 @@
 Distributed Version R
 ============
 
-[Overview](#a_overview) | [New Features](#a_new_features) |  [Terminoloy](#a_terminology) |  [New APIs](#a_new_apis) | [Deployment](#a_deployment) | [Quick Example](#a_example) 
+[Overview](#a_overview) | [New Features](#a_new_features) |  [Terminoloy](#a_terminology) |  [New APIs](#a_new_apis) | [Deployment](#a_deployment) 
 <a name="a_overview"></a>
 ## Overview
 HTTP/REST/SOAP client as a service.
@@ -374,7 +374,4 @@ akka {
 2. Install REST Commander on all your machines.
 3. Call API /distributedagents/createnode to the master node.  This call will trigger master to send http call to other slave nodes to join the cluster.
 4. Wait slaves to join the cluster.
-
-<a name="a_example"></a>
-##Quick Example
 

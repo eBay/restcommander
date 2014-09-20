@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import models.agent.batch.commands.message.BatchResponseFromManager;
+import models.agent.batch.commands.message.GenericResponseFromDirector;
 import models.data.AgentCommandMetadata;
 import models.data.JsonResult;
 import models.data.NodeGroupDataMap;
@@ -49,11 +50,11 @@ public class AgentCommandProvider {
 
 	}
 	
-	public static BatchResponseFromManager generateUpdateSendAgentCommandToNodeGroupAndSleep(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupAndSleep(
 			String nodeGroupType, String agentCommandType,
 			long sleepTimeAfterDoneMillis) {
 
-		BatchResponseFromManager batchResponseFromManager = generateUpdateSendAgentCommandToNodeGroupPredefined(
+		GenericResponseFromDirector batchResponseFromManager = generateUpdateSendAgentCommandToNodeGroupPredefined(
 				nodeGroupType, agentCommandType);
 		try {
 			Thread.sleep(sleepTimeAfterDoneMillis);
@@ -65,11 +66,11 @@ public class AgentCommandProvider {
 
 	}
 	
-	public static BatchResponseFromManager generateUpdateSendAgentCommandToNodeGroupAdhocWithReplaceVarAndSleep(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupAdhocWithReplaceVarAndSleep(
 			String nodeGroupType, String agentCommandType, Map<String, String> replacementVarMap,
 			long sleepTimeAfterDoneMillis) {
 
-		BatchResponseFromManager batchResponseFromManager = generateUpdateSendAgentCommandWithReplaceVarAdhocMap(
+		GenericResponseFromDirector batchResponseFromManager = generateUpdateSendAgentCommandWithReplaceVarAdhocMap(
 				nodeGroupType, agentCommandType, replacementVarMap);
 		try {
 			Thread.sleep(sleepTimeAfterDoneMillis);
@@ -89,7 +90,7 @@ public class AgentCommandProvider {
 	 * @param nodeGroupType
 	 * @param agentCommandType
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandToNodeGroupPredefined(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupPredefined(
 			String nodeGroupType, String agentCommandType) {
 
 		boolean isAdhocData = false;
@@ -109,6 +110,35 @@ public class AgentCommandProvider {
 	}// end function.
 
 	/**
+	 * @author chunyang
+	 * @param nodeGroupType
+	 * @param agentCommandType
+	 * @param token
+	 * @return
+	 * 
+	 * For async polling
+	 */
+	
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupPredefined(
+			String nodeGroupType, String agentCommandType, boolean localMode, boolean failOver, int maxConcNum) {
+
+		boolean isAdhocData = false;
+		boolean useReplacementVarMap = false;
+		Map<String, String> replacementVarMap = null;
+		
+		boolean useReplacementVarMapNodeSpecific = false;
+		Map<String, StrStrMap> replacementVarMapNodeSpecific = null;
+		
+		
+		return AgentCommandProviderHelperInternalFlow.generateUpdateSendAgentCommandToNodeGroupHelper(nodeGroupType,
+				agentCommandType, isAdhocData, useReplacementVarMap,
+				replacementVarMap,
+				useReplacementVarMapNodeSpecific,replacementVarMapNodeSpecific
+				, localMode, failOver, maxConcNum);
+
+	}// end function.
+	
+	/**
 	 * THIS IS THE NEWLY ADDED ONE. 20130827 LIMITATION: NOW ONLY FOR ADHOC
 	 * TODO? Why only ad hoc? Add comments.
 	 * 
@@ -122,7 +152,7 @@ public class AgentCommandProvider {
 	 *            : generic replace the strings in the request.
 	 * @return
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandWithReplaceVarAdhocMap(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandWithReplaceVarAdhocMap(
 			String nodeGroupType, String agentCommandType,
 			Map<String, String> replacementVarMap) {
 
@@ -155,7 +185,7 @@ public class AgentCommandProvider {
 	 *            : generic replace the strings in the request.
 	 * @return
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandWithReplaceVarMapNodeSpecificAdhoc(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandWithReplaceVarMapNodeSpecificAdhoc(
 			String nodeGroupType, String agentCommandType,
 			Map<String, StrStrMap> replacementVarMapNodeSpecific) {
 
@@ -181,7 +211,7 @@ public class AgentCommandProvider {
 	 *           
 	 * @return
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandWithoutReplaceVarAdhocMap(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandWithoutReplaceVarAdhocMap(
 			String nodeGroupType, String agentCommandType) {
 
 		boolean isAdhocData = true;
@@ -211,7 +241,7 @@ public class AgentCommandProvider {
 	 *            : generic replace the strings in the request.
 	 * @return
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandWithReplaceVarAdhocMapNodeSpecific(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandWithReplaceVarAdhocMapNodeSpecific(
 			String nodeGroupType, String agentCommandType,
 			Map<String, StrStrMap> replacementVarMapNodeSpecific) {
 

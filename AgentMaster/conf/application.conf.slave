@@ -27,7 +27,7 @@ play.pool=32
 # ~~~~~
 # The secret key is used to secure cryptographics functions
 # If you deploy your application to several instances be sure to use the same key !
-application.secret=JoDEGQZSrMrzjm3VaYv4NNOlJtTojukDpmZUyClePa8opwaMykvCGtGvW8tDPsho
+application.secret=JoDEGQZSrMrzjm3VaYv4NNOlJtToukDpmZUyClePa8opwaMykvCGtGvW8tDPsho1
 
 # i18n
 # ~~~~~

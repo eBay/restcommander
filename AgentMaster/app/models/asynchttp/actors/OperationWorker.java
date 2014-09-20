@@ -17,22 +17,29 @@ limitations under the License.
 */
 package models.asynchttp.actors;
 
-import static akka.pattern.Patterns.ask;
-
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import models.asynchttp.HttpMethod;
 import models.asynchttp.RequestProtocol;
 import models.asynchttp.actors.HttpWorker.MyResponse;
 import models.asynchttp.request.AgentRequest;
 import models.asynchttp.response.AgentResponse;
 import models.asynchttp.response.GenericAgentResponse;
+import models.asynchttp.request.GenericAgentRequest;
 import models.utils.DateUtils;
+import models.utils.LogUtils;
+import models.utils.MyHttpUtils;
 import models.utils.VarUtils;
-
 import scala.concurrent.Await;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
@@ -40,11 +47,13 @@ import scala.concurrent.duration.FiniteDuration;
 import akka.actor.Actor;
 import akka.actor.ActorRef;
 import akka.actor.Cancellable;
-//import akka.actor.PoisonPill;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import akka.actor.UntypedActorFactory;
+
 import com.ning.http.client.AsyncHttpClient;
+
+import RemoteCluster.SupermanApp;
+import RemoteCluster.CommunicationMessages.initOpMessage;
 
 /**
  * Ning based
@@ -79,12 +88,13 @@ public class OperationWorker extends UntypedActor {
 
 	// jeff
 	private boolean hasBeenDelayed = false;
+	
+	// 20140429 add for knowing if it is SSH
 
-	private static final String CONTENT_TYPE_JSON = "application/json";
 	private static final int HTTP_MAX_RETRIES = 1;
 	private static final long HTTP_RETRY_INTERVAL_MILLIS = 500;
 
-	public enum MessageType {
+	public enum MessageType implements Serializable {
 		PROCESS_REQUEST, GET_PROGRESS, CANCEL
 	}
 
@@ -92,25 +102,40 @@ public class OperationWorker extends UntypedActor {
 		POLL_PROGRESS, OPERATION_TIMEOUT
 	}
 
-	public OperationWorker(final String host,
-			final String hostUniform,  final String httpHeaderType,
-			final int agentPort, final RequestProtocol protocol,
-			final AgentRequest request, final AsyncHttpClient client) {
+	public OperationWorker(initOpMessage message) {
 		super();
 
-		this.client = client;
-		this.protocol = protocol;
-		this.host = host;
-		this.hostUniform = hostUniform;
-		this.httpHeaderType = httpHeaderType;
-		this.agentPort = agentPort;
-		this.request = request;
-
+		this.protocol = RequestProtocol.fromString(message.protocol);
+		this.host = message.host;
+		this.hostUniform = message.hostUniform;
+		this.httpHeaderType = message.httpHeaderType;
+		this.agentPort = message.agentPort;
+		final Map<String, String> httpHeaderMap = MyHttpUtils
+				.getHttpHeaderMapCopyFromHeaderMetadataMapStatic(
+						message.httpHeaderType, message.protocol);
+		this.request = new GenericAgentRequest(message.maxTries, message.retryIntervalMillis,
+				message.pollIntervalMillis, message.maxOperationTimeSeconds,
+				message.statusChangeTimeoutSeconds, message.resourcePath,
+				message.requestContent, message.httpMethod, message.pollable, message.pauseIntervalBeforeSendMillis,
+				httpHeaderMap);
+		this.client =  (
+				!httpHeaderType
+				.equalsIgnoreCase(VarUtils.STR_HTTP_HEADER_TYPE_LBMS)
+				&& !httpHeaderType
+						.equalsIgnoreCase(VarUtils.STR_HTTP_HEADER_TYPE_LBMS_ASYNC)
+				&& !httpHeaderType
+						.equalsIgnoreCase(VarUtils.STR_HTTP_HEADER_TYPE_UDNS) && !message.agentCommandType
+				.contains(VarUtils.AGENT_CMD_KEY_SLOW_CLIENT_SUBSTR)) ? VarUtils.ningClientFactory
+				.getFastClient() : VarUtils.ningClientFactory
+				.getSlowClient();
+		this.sender = message.manager;
+		processRequest();
 	}
 
 	@Override
 	public void onReceive(Object message) throws Exception {
 		try {
+			//System.out.println("Op received at : " + Calendar.getInstance().getTimeInMillis());
 			if (message instanceof InternalMessageType) {
 				switch ((InternalMessageType) message) {
 
@@ -120,9 +145,9 @@ public class OperationWorker extends UntypedActor {
 				}
 			} else if (message instanceof MessageType) {
 				switch ((MessageType) message) {
-				case PROCESS_REQUEST:
+				/*case PROCESS_REQUEST:
 					processRequest();
-					break;
+					break;*/
 
 				case GET_PROGRESS:
 					sendProgress();
@@ -136,7 +161,9 @@ public class OperationWorker extends UntypedActor {
 			} else if (message instanceof MyResponse) {
 				final MyResponse myResponse = (MyResponse) message;
 				handleHttpWorkerResponse(myResponse);
-			} else {
+			} else /*if (message instanceof InitOperationMessage) {
+				
+			} else */{
 				unhandled(message);
 			}
 		} catch (Exception e) {
@@ -154,8 +181,7 @@ public class OperationWorker extends UntypedActor {
 		// Jeff 20310411: use generic response
 		
 		agentResponse = new GenericAgentResponse(myResponse.getResponse(),
-				DateUtils.getNowDateTimeStrSdsm());
-		
+				DateUtils.getNowDateTimeStrSdsm(), getSelf().path().toString());
 		if (myResponse.isError()) {
 			reply(true, myResponse.getErrorMessage(), myResponse.getStackTrace(),  myResponse.getStatusCode());
 		}else{
@@ -179,7 +205,7 @@ public class OperationWorker extends UntypedActor {
 
 			// jeff only the first time will pause
 
-			sender = getSender();
+			//sender = getSender();
 			startTimeMillis = System.currentTimeMillis();
 
 			validateRequest(request);
@@ -195,6 +221,9 @@ public class OperationWorker extends UntypedActor {
 				long pauseIntervalWorkerMillis = Math.min(
 						MAX_PAUSE_INTERVAL_MILLIS,
 						this.request.getPauseIntervalBeforeSendMillis());
+				/**
+				 * Migrate to akka 2.3.3
+				 */
 				getContext()
 						.system()
 						.scheduler()
@@ -203,8 +232,7 @@ public class OperationWorker extends UntypedActor {
 										TimeUnit.MILLISECONDS),
 								getSelf(),
 								OperationWorker.MessageType.PROCESS_REQUEST,
-								getContext().system().dispatcher());
-
+								getContext().system().dispatcher(), getSelf());
 				return;
 
 			}
@@ -217,31 +245,67 @@ public class OperationWorker extends UntypedActor {
 		final String trueTargetNode = (hostUniform == null) ? host
 				: hostUniform;
 
-		asyncWorker = getContext().actorOf(new Props(new UntypedActorFactory() {
-			private static final long serialVersionUID = 1L;
+		
+		/**
+		 * 20140429: change to based on agent command type SSH? HTTP to decide to call whether SshWorker or HttpWorker 
+		 * COMMAND_PREFIX_SSH
+		 */
+		
+		//if(!agentCommandType.contains(VarUtils.COMMAND_PREFIX_SSH)){
+		if(protocol!=RequestProtocol.SSH){	
+			/**
+			 * Migrate to akka 2.3.3
+			 */
+			asyncWorker = getContext().actorOf(
+						Props.create(HttpWorker.class,
+								client, protocol, 
+								String.format("%s://%s:%d%s",
+										protocol.toString(), trueTargetNode, agentPort,
+										request.getResourcePath()),
+								request.getHttpMethod(), request.getPostData(),
+								HTTP_MAX_RETRIES,
+								HTTP_RETRY_INTERVAL_MILLIS, httpHeaderType,
+								request.getHttpHeaderMap())
+					);
+		}else{
+			
+			// 20140428
+			/**
+			 * Migrate to akka 2.3.3
+			 */
+			asyncWorker = getContext().actorOf(
+						Props.create(SshWorker.class,
+								httpHeaderType, 
+								request.getPostData(), 
+								protocol, 
+								String.format("%s@%s",
+										request.getResourcePath(), trueTargetNode),
+								request.getHttpMethod(),
+								HTTP_RETRY_INTERVAL_MILLIS,
+								HTTP_MAX_RETRIES
+								)
+					);
 
-			public Actor create() {
-				final String requestUrl = String.format("%s://%s:%d%s",
-						protocol.toString(), trueTargetNode, agentPort,
-						request.getResourcePath());
-
-				return new HttpWorker(client, protocol, requestUrl,
-						request.getHttpMethod(), request.getPostData(),
-						CONTENT_TYPE_JSON, HTTP_MAX_RETRIES,
-						HTTP_RETRY_INTERVAL_MILLIS, httpHeaderType);
-			}
-		}));
+		}
+		
+		
 		asyncWorker.tell(HttpWorker.MessageType.PROCESS_REQUEST,
 				getSelf());
+		
+		
+		
 
 		// To handle cases where this operation takes extremely long, schedule a
 		// 'timeout' message to be sent to us
+		/**
+		 * Migrate to akka 2.3.3
+		 */
 		timeoutMessageCancellable = getContext()
 				.system()
 				.scheduler()
 				.scheduleOnce(timeoutDuration, getSelf(),
 						InternalMessageType.OPERATION_TIMEOUT,
-						getContext().system().dispatcher());
+						getContext().system().dispatcher(), getSelf());
 
 	}
 

@@ -31,6 +31,7 @@ import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;
 import models.asynchttp.RequestProtocol;
 import models.asynchttp.actors.OperationWorker;
 import models.data.HttpHeaderMetadata;
+import models.data.NodeReqResponse;
 import models.data.providers.AgentDataProvider;
 
 /**
@@ -43,9 +44,58 @@ import models.data.providers.AgentDataProvider;
 public class MyHttpUtils {
 
 	
-	public static final String STR_HTTP_HEADER_TYPE_LBMS = "HEADER_LBMS";
-	public static final String STR_HTTP_HEADER_TYPE_LBMS_ASYNC = "HEADER_LBMS_ASYNC";
-	public static final String STR_HTTP_HEADER_TYPE_UDNS = "HEADER_UDNS";
+	
+
+	/**
+	 * 20140310: this just grab the static one. 
+	 * 
+	 * This return a copy
+	 * 
+
+	 * 
+	 * @param httpHeaderType
+	 * @return
+	 */
+	public static Map<String, String> getHttpHeaderMapCopyFromHeaderMetadataMapStatic(
+			String httpHeaderType, String requestProtocol) {
+		
+		Map<String, String> httpHeaderMapTemp = new HashMap<String,String>();
+		
+		//if(agentCommandType.contains(VarUtils.COMMAND_PREFIX_SSH)){
+		if(requestProtocol.equalsIgnoreCase(RequestProtocol.SSH.toString())){
+		
+			// 20140501 this map will not be used. no impact and no errors
+			return httpHeaderMapTemp;
+		}
+			
+		
+		if ( httpHeaderType != null) {
+
+			AgentDataProvider adp = AgentDataProvider.getInstance();
+			HttpHeaderMetadata httpHeaderMetadata = adp.headerMetadataMap.get(httpHeaderType);
+			
+			 // 20140416: 
+			// POTENTIAL BUG FIXED: LACK ERROR HANDLING: WHEN LACK OF HTTP HEADER ID is not defined throw exceptions: 
+			if(httpHeaderMetadata!=null){
+				httpHeaderMapTemp.putAll(httpHeaderMetadata.getHeaderMap());
+			}else{
+				 models.utils.LogUtils.printLogError
+				 ("httpHeaderType is NOT DEFINED IN httpHeaderMetadata!!!! in getHttpHeaderMapFromHeaderMetadataMap()");
+			}
+
+		} else {
+			 models.utils.LogUtils.printLogError
+					 ("httpHeaderType is NULL in getHttpHeaderMapFromHeaderMetadataMap()");
+		}
+		
+		return httpHeaderMapTemp;
+	}
+	
+	
+	
+	/**********ABOVE IS THE NEW WAY IN MANAGER PASSING > 2014.3**************************************/
+	
+	/**********BELOW IS THE OLDER WAY IN HTTP WORKER < 2014.1**************************************/
 	
 
 	public static void addHeaders(BoundRequestBuilder builder,
@@ -58,46 +108,6 @@ public class MyHttpUtils {
 
 	}
 
-	/**
-	 *  20131215
-	 * Called in httpWorker
-	 * @param builder
-	 * @param protocol
-	 */
-	public static void addAllHeadersFromHeaderMetadataMap(BoundRequestBuilder builder,
-			String httpHeaderType) {
-		if (builder != null && httpHeaderType != null) {
-
-			AgentDataProvider adp = AgentDataProvider.getInstance();
-			HttpHeaderMetadata httpHeaderMetadata = adp.headerMetadataMap.get(httpHeaderType);
-			addHeaders(builder, httpHeaderMetadata.getHeaderMap());
-
-			// add dynamic headers
-			addDynamicHeaders(builder, httpHeaderType);
-			
-		} else {
-			 models.utils.LogUtils.printLogError
-					 ("Failed to build request; builder is null, unknown method in createRequest()");
-		}
-	}
-	
-	public static void addDynamicHeaders(BoundRequestBuilder builder,
-			String httpHeaderType) {
-		if (builder != null && httpHeaderType != null) {
-
-			/**
-			 * TODO: for further extension
-			 */
-//			if (httpHeaderType.equalsIgnoreCase(MyHttpUtils.TBC)
-//					){
-//				builder.addHeader("DynamicHeaderKey", HeaderUtils.addDynamicHeader(arg));
-//			}
-			
-		} else {
-			 models.utils.LogUtils.printLogError
-					 ("Failed to build request; builder is null, unknown method in createRequest()");
-		}
-	}
 	
 	public static String readHttpRequestPostData(InputStream httpBody) {
 
@@ -142,4 +152,6 @@ public class MyHttpUtils {
 		return postData;
 
 	}
+	
+	
 }

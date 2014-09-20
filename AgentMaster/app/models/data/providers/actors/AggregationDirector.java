@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import models.agent.batch.commands.message.BatchResponseFromManager;
 import models.agent.batch.commands.message.InitialRequestToManager;
 import models.asynchttp.actors.ActorConfig;
-import models.asynchttp.actors.CommandManager;
 import models.data.AggregateData;
 import models.data.NodeGroupDataMap;
 import models.data.providers.LogProvider;
@@ -37,7 +36,6 @@ import scala.concurrent.duration.FiniteDuration;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import akka.actor.UntypedActorFactory;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 /**
@@ -78,13 +76,9 @@ public class AggregationDirector {
 
 			// create the master
 			aggregationManager = ActorConfig.getActorSystem().actorOf(
-					new Props(new UntypedActorFactory() {
-						private static final long serialVersionUID = 1L;
-
-						public UntypedActor create() {
-							return new AggregationManager();
-						}
-					}), "AggregationManager-" + UUID.randomUUID().toString());
+					Props.create(AggregationManager.class),
+					"AggregationManager-" + UUID.randomUUID().toString()
+				);
 
 			final FiniteDuration duration = Duration.create(
 					VarUtils.TIMEOUT_ASK_AGGREGATION_MANAGER_SCONDS,

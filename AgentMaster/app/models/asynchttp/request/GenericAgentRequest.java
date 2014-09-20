@@ -17,6 +17,8 @@ limitations under the License.
 */
 package models.asynchttp.request;
 
+import java.util.Map;
+
 import models.asynchttp.HttpMethod;
 import models.asynchttp.response.GenericAgentResponse;
 import models.utils.DateUtils;
@@ -41,10 +43,12 @@ public class GenericAgentRequest extends AgentRequest {
 	public GenericAgentRequest(int maxTries, long retryIntervalMillis,
 			long pollIntervalMillis, int maxOperationTimeSeconds,
 			int statusChangeTimeoutSeconds, String resourcePath,
-			String requestContent, String httpMethod, boolean pollable, long pauseIntervalBeforeSendMillis) {
+			String requestContent, String httpMethod, boolean pollable, long pauseIntervalBeforeSendMillis,
+			Map<String, String> httpHeaderMap
+			) {
 		super(maxTries, retryIntervalMillis, pollIntervalMillis,
 				maxOperationTimeSeconds, statusChangeTimeoutSeconds, pollable,
-				GenericAgentResponse.class, pauseIntervalBeforeSendMillis);
+				GenericAgentResponse.class, pauseIntervalBeforeSendMillis,httpHeaderMap );
 
 		this.resourcePath = resourcePath;
 		this.requestContent = requestContent;

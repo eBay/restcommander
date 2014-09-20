@@ -21,8 +21,8 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 
+import RemoteCluster.SupermanApp;
 import models.agent.batch.commands.message.BatchResponseFromManager;
-import models.asynchttp.actors.CommandDirector;
 import models.data.AggregateData;
 import models.data.AggregationValueMetadata;
 import models.data.JsonResult;
@@ -129,7 +129,7 @@ public class Agents extends Controller {
 
 			// AgentCommandDirector director =
 			// AgentCommandDirector.getInstance();
-			CommandDirector director = new CommandDirector();
+			//CommandDirector director = new CommandDirector();
 
 			Map<String, NodeGroupDataMap> dataStore = null;
 			if (isAdhoc == null || isAdhoc == false) {
@@ -137,12 +137,17 @@ public class Agents extends Controller {
 			} else {
 				dataStore = AgentDataProvider.adhocAgentData;
 			}
-
-			BatchResponseFromManager batchResponseFromManager = director
+			/**
+			 * @author chunyang
+			 * Migrate to distributed superman
+			 */
+			/*BatchResponseFromManager batchResponseFromManager = director
 					.sendAgentCommandToManager(nodeGroupType, agentCommandType,
-							dataStore);
-
-			renderJSON(batchResponseFromManager);
+							dataStore);*/
+			SupermanApp.sendAgentCommandToManager(nodeGroupType, agentCommandType, 
+					dataStore, false, false, VarUtils.MAX_CONCURRENT_SEND_SIZE, false);
+			
+			renderJSON(dataStore.get(nodeGroupType).getNodeGroupDataMapValidForSingleCommand(agentCommandType));
 		} catch (Throwable t) {
 
 			t.printStackTrace();

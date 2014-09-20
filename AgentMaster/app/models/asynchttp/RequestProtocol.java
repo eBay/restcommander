@@ -22,7 +22,7 @@ package models.asynchttp;
  *
  */
 public enum RequestProtocol {
-	HTTP, HTTPS;
+	HTTP, HTTPS, SSH;
 
 	@Override
 	public String toString() {

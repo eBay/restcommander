@@ -17,18 +17,24 @@ limitations under the License.
 */
 package models.asynchttp.response;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  * Generic
  * 
  * @author ypei
  * 
  */
-public class GenericAgentResponse extends AgentResponse {
+public class GenericAgentResponse extends AgentResponse implements Serializable{
 
-	public GenericAgentResponse(String responseContent, String receiveTime) {
+	public GenericAgentResponse(String responseContent, String receiveTime, String workerPath) {
 		super();
 		this.responseContent = responseContent;
 		this.receiveTime = receiveTime;
+		this.workerPath = workerPath;
 	}
 	
 	public GenericAgentResponse(AgentResponse agentResponse, String receiveInManagerTime) {
@@ -42,6 +48,8 @@ public class GenericAgentResponse extends AgentResponse {
 		
 	}
 
+	private String workerPath;
+	
 	private String responseContent;
 
 	private String receiveTime;
@@ -61,6 +69,10 @@ public class GenericAgentResponse extends AgentResponse {
 	public void setResponseContent(String responseContent) {
 		this.responseContent = responseContent;
 	}
+	
+	public String getWorkerPath() {
+		return this.workerPath;
+	}
 
 	@Override
 	public String toString() {
@@ -75,6 +87,4 @@ public class GenericAgentResponse extends AgentResponse {
 				+ ", toString()=" + super.toString() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
-
-
 }

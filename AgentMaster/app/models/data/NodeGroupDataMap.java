@@ -42,7 +42,7 @@ public class NodeGroupDataMap {
 	
 	// Map<DataType, dataToAgent>; CAREFUL: when node list is resync, this needs
 	// to be reset!
-	private final Map<String, NodeData> nodeDataMapValid = new HashMap<String, NodeData>();
+	private Map<String, NodeData> nodeDataMapValid = new HashMap<String, NodeData>();
 	private final Map<String, NodeData> nodeDataMapInProgress = new HashMap<String, NodeData>();
 
 	public NodeGroupDataMap(String nodeGroupType) {
@@ -66,6 +66,9 @@ public class NodeGroupDataMap {
 		return nodeDataMapInProgress;
 	}
 	
+	public void setNodeDataMapValid(Map<String, NodeData> nodeDataMapValid) {
+		this.nodeDataMapValid = nodeDataMapValid;
+	}
 	
 	public Map<String, NodeData> getNodeGroupDataMapValidForSingleCommand(String agentCommandType){
 		

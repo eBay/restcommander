@@ -19,6 +19,7 @@ package jobs;
 
 import models.data.providers.AgentDataProvider;
 import models.monitor.MonitorProvider;
+import models.utils.ConfUtils;
 import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -32,6 +33,7 @@ public class Bootstrap extends Job {
 
     public void doJob() {
        //do stuff
+    	//ConfUtils.updateServerInstancePrefix();
     	AgentDataProvider adp = AgentDataProvider.getInstance();
     	adp.updateConfigFromAllFiles();
     	

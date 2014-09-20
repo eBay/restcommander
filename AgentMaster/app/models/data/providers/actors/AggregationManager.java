@@ -61,7 +61,6 @@ import akka.actor.Props;
 import akka.actor.SupervisorStrategy;
 import akka.actor.SupervisorStrategy.Directive;
 import akka.actor.UntypedActor;
-import akka.actor.UntypedActorFactory;
 import akka.japi.Function;
 
 /**
@@ -171,17 +170,12 @@ public class AggregationManager extends UntypedActor {
 				
 				final NodeData nodeData = entry.getValue();
 				final ActorRef worker = getContext().system().actorOf(
-						new Props(new UntypedActorFactory() {
-							private static final long serialVersionUID = 1L;
-
-							final RequestToAggregationWorker request = new RequestToAggregationWorker(
-									nodeData, agentCommandType,
-									errorMsgPatternStr, patternStr);
-
-							public Actor create() {
-								return new AggregationWorker(request, fqdn);
-							}
-						}));
+						Props.create(AggregationWorker.class,
+									new RequestToAggregationWorker(
+											nodeData, agentCommandType,
+											errorMsgPatternStr, patternStr),
+									fqdn
+								));
 
 				workers.add(worker);
 
@@ -216,7 +210,7 @@ public class AggregationManager extends UntypedActor {
 					.scheduler()
 					.scheduleOnce(timeOutDuration, getSelf(),
 							InternalMessageType.OPERATION_TIMEOUT,
-							getContext().system().dispatcher());
+							getContext().system().dispatcher(), getSelf());
 			if (VarUtils.IN_DETAIL_DEBUG) {
 				 models.utils.LogUtils.printLogError
 						 ("Scheduled TIMEOUT_ASK_AGGREGATION_MANAGER_SCONDS OPERATION_TIMEOUT after SEC: "

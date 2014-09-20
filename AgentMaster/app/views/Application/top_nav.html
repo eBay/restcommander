@@ -11,15 +11,20 @@
 					
 					<li #{if (topnav == "commands")} class="active" #{/if}><a href="/commands">Commands</a></li>	
 					
+					<li #{if (topnav == "distributedSuperman")} class="active" #{/if}><a href="/distributedagents/index">Dashboard</a></li>	
+					
 					<li #{if (topnav == "nodeGroups")} class="active" #{/if}><a href="/nodeGroups">Nodes</a></li>	
 					
 					<li #{if (topnav == "wizards")} class="active" #{/if}><a href="/wizards">Wizards</a></li>				
+					
 					<li #{if (topnav == "logs")} class="active" #{/if}><a href="/logs">Logs</a></li>				
 					
-					<!--
-					 -->
+					
 					  
 					<li #{if (topnav == "config")} class="active" #{/if}><a href="/config"  title="Config" ><i class="fa fa-wrench"></i></a></li>
+					<!--
+					<li #{if (topnav == "commandscommon")} class="active" #{/if}><a href="/commands/common"  title="Common Commands" ><i class="fa fa-thumb-tack"></i></a></li>
+					 -->
 					
 					<li #{if (topnav == "new")} class="active" #{/if}><a href="/whatsnew"  title="Release Notes -- What's New? " ><i class="fa fa-leaf"></i></a></li>
 					

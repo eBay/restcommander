@@ -20,14 +20,18 @@ package models.asynchttp.actors;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import models.asynchttp.HttpMethod;
+import models.asynchttp.NingClientFactory;
 import models.asynchttp.RequestProtocol;
 import models.utils.DateUtils;
 import models.utils.ErrorMsgUtils;
 import models.utils.MyHttpUtils;
 import models.utils.StringUtils;
+import models.utils.TokenUtils;
 import models.utils.VarUtils;
 
 import scala.concurrent.duration.Duration;
@@ -55,13 +59,16 @@ public class HttpWorker extends UntypedActor {
 	private final String requestUrl;
 	private final HttpMethod httpMethod;
 	private final String postData;
-	private final String contentType;
 	private final int maxTries;
 	private final long retryIntervalMillis;
 
 
 	// 20131215: 
 	private final String httpHeaderType;
+	
+	//20140310
+	private final Map<String, String> httpHeaderMap = new HashMap<String,String>();
+	
 	
 	private ActorRef sender = null;
 	private Throwable cause;
@@ -78,8 +85,9 @@ public class HttpWorker extends UntypedActor {
 	public HttpWorker(final AsyncHttpClient client,
 			final RequestProtocol protocol, final String requestUrl,
 			final HttpMethod httpMethod, final String postData,
-			final String contentType, final int maxTries,
-			final long retryIntervalMillis, final String httpHeaderType
+			final int maxTries,
+			final long retryIntervalMillis, final String httpHeaderType,
+			final Map<String, String> httpHeaderMap
 
 	) {
 		this.client = client;
@@ -87,10 +95,10 @@ public class HttpWorker extends UntypedActor {
 		this.requestUrl = requestUrl;
 		this.httpMethod = httpMethod;
 		this.postData = postData;
-		this.contentType = contentType;
 		this.maxTries = maxTries;
 		this.retryIntervalMillis = retryIntervalMillis;
 		this.httpHeaderType = httpHeaderType;
+		this.httpHeaderMap.putAll(httpHeaderMap);
 
 	}
 	
@@ -124,14 +132,13 @@ public class HttpWorker extends UntypedActor {
 			}
 			if (builder != null) {
 
-				//MyHttpUtils.addAllHeaders(builder, protocol);
+
+				//new 
+				MyHttpUtils.addHeaders(builder,
+						this.httpHeaderMap);
 				
-				MyHttpUtils.addAllHeadersFromHeaderMetadataMap(builder, httpHeaderType);
-//
-//				if (httpHeaderTypeNum == OperationWorker.HTTP_HEADER_TYPE_CMS) {
-//					builder.addHeader("Authorization", VarUtils.AUTH_CMS_AGENT);
-//				}
-				
+				//OLD Depreciated 20140310
+				//MyHttpUtils.addAllHeadersFromHeaderMetadataMap(builder, httpHeaderType);
 				
 				
 				if (!StringUtils.isNullOrEmpty(postData)) {
@@ -178,12 +185,15 @@ public class HttpWorker extends UntypedActor {
 					// To handle cases where nio response never comes back, we
 					// schedule a 'timeout' message to be sent to us 2 seconds
 					// after NIO's SO_TIMEOUT
+					/**
+					 * Migrate to akka 2.3.3
+					 */
 					timeoutMessageCancellable = getContext()
 							.system()
 							.scheduler()
 							.scheduleOnce(timeoutDuration, getSelf(),
 									MessageType.PROCESS_ON_TIMEOUT,
-									getContext().system().dispatcher());
+									getContext().system().dispatcher(), getSelf());
 
 					break;
 
@@ -266,7 +276,7 @@ public class HttpWorker extends UntypedActor {
 
 		if (!sentReply) {
 			final MyResponse res = new MyResponse(protocol, requestUrl,
-					httpMethod, postData, contentType, maxTries,
+					httpMethod, postData,  maxTries,
 					retryIntervalMillis, response, error, errorMessage,
 					stackTrace, statusCode);
 			if (!getContext().system().deadLetters().equals(sender)) {
@@ -300,14 +310,14 @@ public class HttpWorker extends UntypedActor {
 		private final MyRequest request;
 
 		public MyResponse(RequestProtocol protocol, String requestUrl,
-				HttpMethod httpMethod, String postData, String contentType,
+				HttpMethod httpMethod, String postData, 
 				int maxTries, long retryIntervalMillis, String response,
 				boolean error, String errorMessage, String stackTrace,
 				String statusCode) {
 			super();
 
 			this.request = new MyRequest(protocol, requestUrl, httpMethod,
-					postData, contentType, maxTries, retryIntervalMillis);
+					postData,  maxTries, retryIntervalMillis);
 			this.response = response;
 			this.error = error;
 			this.errorMessage = errorMessage;
@@ -351,19 +361,17 @@ public class HttpWorker extends UntypedActor {
 			private final String requestUrl;
 			private final HttpMethod httpMethod;
 			private final String postData;
-			private final String contentType;
 			private final int maxTries;
 			private final long retryIntervalMillis;
 
 			public MyRequest(RequestProtocol protocol, String requestUrl,
-					HttpMethod httpMethod, String postData, String contentType,
+					HttpMethod httpMethod, String postData, 
 					int maxTries, long retryIntervalMillis) {
 				super();
 				this.protocol = protocol;
 				this.requestUrl = requestUrl;
 				this.httpMethod = httpMethod;
 				this.postData = postData;
-				this.contentType = contentType;
 				this.maxTries = maxTries;
 				this.retryIntervalMillis = retryIntervalMillis;
 			}
@@ -384,9 +392,6 @@ public class HttpWorker extends UntypedActor {
 				return postData;
 			}
 
-			public String getContentType() {
-				return contentType;
-			}
 
 			public int getMaxTries() {
 				return maxTries;
@@ -400,8 +405,7 @@ public class HttpWorker extends UntypedActor {
 			public String toString() {
 				return "Request [protocol=" + protocol + ", requestUrl="
 						+ requestUrl + ", httpMethod=" + httpMethod
-						+ ", postData=" + postData + ", contentType="
-						+ contentType + ", maxTries=" + maxTries
+						+ ", postData=" + postData + ", maxTries=" + maxTries
 						+ ", retryIntervalMillis=" + retryIntervalMillis + "]";
 			}
 		}
@@ -454,5 +458,12 @@ public class HttpWorker extends UntypedActor {
 		getSelf().tell(MessageType.PROCESS_ON_EXCEPTION, getSelf());
 
 	}
+
+
+	public String getHttpHeaderType() {
+		return httpHeaderType;
+	}
+	
+	
 
 }

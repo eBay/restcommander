@@ -21,8 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import RemoteCluster.SupermanApp;
 import models.agent.batch.commands.message.BatchResponseFromManager;
-import models.asynchttp.actors.CommandDirector;
+import models.agent.batch.commands.message.GenericResponseFromDirector;
 import models.data.AgentCommandMetadata;
 import models.data.JsonResult;
 import models.data.NodeGroupDataMap;
@@ -62,7 +63,7 @@ public class AgentCommandProviderHelperInternalFlow {
 	 * @param replacementVarMap
 	 * @return
 	 */
-	public static BatchResponseFromManager generateUpdateSendAgentCommandToNodeGroupHelper(
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupHelper(
 			String nodeGroupType, String agentCommandType, boolean isAdhocData,
 			boolean useReplacementVarMap,
 			Map<String, String> replacementVarMap,
@@ -75,7 +76,7 @@ public class AgentCommandProviderHelperInternalFlow {
 		Map<String, NodeGroupSourceMetadata> nodeGroupStore = (isAdhocData) ? AgentDataProvider.adhocNodeGroups
 				: AgentDataProvider.nodeGroupSourceMetadatas;
 
-		BatchResponseFromManager batchResponseFromManager = null;
+		GenericResponseFromDirector batchResponseFromManager = null;
 
 		try {
 
@@ -119,10 +120,13 @@ public class AgentCommandProviderHelperInternalFlow {
 						dataStore, nodeGroupStore);
 			}
 
-			CommandDirector director = new CommandDirector();
-			batchResponseFromManager = director.sendAgentCommandToManager(
-					nodeGroupType, agentCommandType, dataStore);
-
+			/**
+			 * @author chunyang
+			 * Distribute Supermen, use Cluster & remote deploy
+			 */
+			SupermanApp.initClusterSystem("2551", "");
+			batchResponseFromManager = SupermanApp.sendAgentCommandToManager(nodeGroupType, agentCommandType, dataStore, false, false, VarUtils.MAX_CONCURRENT_SEND_SIZE, false);
+			
 		} catch (Throwable t) {
 
 			t.printStackTrace();
@@ -131,6 +135,98 @@ public class AgentCommandProviderHelperInternalFlow {
 
 	}// end function.
 
+	
+	/**
+	 * @author chunyang
+	 * @param nodeGroupType
+	 * @param agentCommandType
+	 * @param isAdhocData
+	 * @param useReplacementVarMap
+	 * @param replacementVarMap
+	 * @param useReplacementVarMapNodeSpecific
+	 * @param replacementVarMapNodeSpecific
+	 * @param token
+	 * @return
+	 * 
+	 * For async polling
+	 */
+	
+	public static GenericResponseFromDirector generateUpdateSendAgentCommandToNodeGroupHelper(
+			String nodeGroupType, String agentCommandType, boolean isAdhocData,
+			boolean useReplacementVarMap,
+			Map<String, String> replacementVarMap,
+			boolean useReplacementVarMapNodeSpecific,
+			Map<String, StrStrMap> replacementVarMapNodeSpecific,
+			boolean localMode, boolean failOver, int maxConcNum) {
+
+		Map<String, NodeGroupDataMap> dataStore = (isAdhocData) ? AgentDataProvider.adhocAgentData
+				: AgentDataProvider.allAgentData;
+
+		Map<String, NodeGroupSourceMetadata> nodeGroupStore = (isAdhocData) ? AgentDataProvider.adhocNodeGroups
+				: AgentDataProvider.nodeGroupSourceMetadatas;
+
+		GenericResponseFromDirector batchResponseFromManager = null;
+
+		try {
+
+			/**
+			 * CATCH EXCEPTION: fixed 20130828. LESSON: for none existing node
+			 * group; must have check
+			 */
+
+			NodeGroupSourceMetadata nodeGroupSourceMetadata = nodeGroupStore
+					.get(nodeGroupType);
+			if (nodeGroupSourceMetadata == null) {
+
+				String errMessage = "nodeGroupSourceMetadata  is NULL in generateUpdateSendAgentCommandToNodeGroupHelper. EXIT!!"
+						+ DateUtils.getNowDateTimeStrSdsm();
+				models.utils.LogUtils.printLogError(errMessage);
+				batchResponseFromManager = new BatchResponseFromManager();
+
+				return batchResponseFromManager;
+			}
+
+			// generate content
+			AgentDataProvider adp = AgentDataProvider.getInstance();
+			adp.generateAgentCommandInNodeGroupDataMap(nodeGroupType,
+					agentCommandType, dataStore, nodeGroupStore);
+
+			// 20130828. updateRequestContent Whether to do VAR replacement?
+			if (useReplacementVarMap) {
+
+				updateRequestContentGenericWithVarReplacement(nodeGroupType,
+						agentCommandType, dataStore, nodeGroupStore,
+						replacementVarMap);
+
+				// 20130916 do node specific VAR replacement
+			} else if (useReplacementVarMapNodeSpecific) {
+				updateRequestContentGenericWithVarReplacementNodeSpecific(
+						nodeGroupType, agentCommandType, dataStore,
+						nodeGroupStore, replacementVarMapNodeSpecific);
+
+				// traditional; no replacement or hardcoded node specific
+				// replacement for cassinit topology, hwPath, colo, rack....
+				// etc.
+			} else {
+				updateRequestContentGeneric(nodeGroupType, agentCommandType,
+						dataStore, nodeGroupStore);
+			}
+
+			/**
+			 * @author chunyang
+			 * Distribute Supermen, use Cluster & remote deploy
+			 */
+			SupermanApp.initClusterSystem("2551", "");
+			batchResponseFromManager = SupermanApp.sendAgentCommandToManager(nodeGroupType, agentCommandType, dataStore, localMode, failOver, maxConcNum, true);
+			
+		} catch (Throwable t) {
+
+			t.printStackTrace();
+		}
+		return batchResponseFromManager;
+
+	}// end function.
+	
 	/**
 	 * 20130828: this is the API based replacement.
 	 * 

@@ -52,7 +52,8 @@ public class VarUtils {
 	public static String AGGREGATION_SUPERMAN_SPECIAL_RESPONSE_TIME = "SUPERMAN_SPECIAL_RESPONSE_TIME";
 	public static String SUPERMAN_NOT_FIRE_REQUEST = "SUPERMANSPECIAL_REQUEST_NOT_FIRED.NO_RESPONSE.NOT_ERROR.CHECK_REQUEST_PARAMETERS_FOR_DETAILS.";
 
-
+	public static final String SUCCESS_FLAG="LOG_SUCCESS";
+	public static int LOG_WORKER_MAX_OPERATION_TIME_SECONDS_DEFAULT = 600; 
 	
 	public static final String NODEGROUP_CONF_NODEGROUP_ADHOC_NODE_LIST_TOP100WEBSITES = "ADHOC_NODE_LIST_TOP100WEBSITES";
 	public static final String AGENT_CMD_KEY_GET_FRONT_PAGE = "GET_FRONT_PAGE";
@@ -111,6 +112,7 @@ public class VarUtils {
 	public static long TIMEOUT_ASK_AGGREGATION_MANAGER_SCONDS = 30; // 30 sec
 	public static long TIMEOUT_ASK_MANAGER_SCONDS = 2520; // 42MIN
 	public static long TIMEOUT_IN_MANAGER_SCONDS = 2400; // 40MIN
+	public static long TIMEOUT_ASK_LOGWORKER_SCONDS = 3600;
 	public static final String ACTOR_SYSTEM = "AgentMasterActorSystem";
 
 	public static long ACTOR_BATCH_JOB_SLEEP_INTERVAL_MILLIS = 20000L;
@@ -207,7 +209,13 @@ public class VarUtils {
 	public static final String AGENT_CMD_CONF_VARIABLES_PREDEFINED_LIST_START = "```VARIABLES_PREDEFINED_LIST_START";
 	public static final String AGENT_CMD_CONF_VARIABLES_PREDEFINED_LIST_END = "```VARIABLES_PREDEFINED_LIST_END";
 
+	public static String STR_SSH_PASSWORD_MASKED = "SSH_PASSWORD_MASKED***";
 
+	public static int SSH_BUFFER_SIZE = 4096;
+	public static int SSH_SLEEP_MILLIS_BTW_READ_BUFFER = 100;
+	public static String SSH_COMMAND_PREPROCESS = "mkdir -p .superman_tmp; cd .superman_tmp; ";
+	public static int SSH_CONNECTION_TIMEOUT_MILLIS = ConfUtils.getIntFromApplicationConfVarValue("SSH_CONNECTION_TIMEOUT_MILLIS"); 
+	
 	// BECAREFUL. this is a special case that require the prefix.
 	// where the general search and replace cannot happen because this is on
 	// target node field. Because we cannot put into the original fqdn of the
@@ -302,10 +310,11 @@ public class VarUtils {
 	public static final long PAUSE_TIME_BEFORE_ACTIVATE_MANIFEST_LONG_MILLIS = 60 * 1000L;
 
 	public static final long PAUSE_TIME_BEFORE_ACTIVATE_MANIFEST_LONG_MILLIS_EACHNODE_INCREMENT = 10L;
-
+	
 	// 20130925 for delete logs
 	public static String SUPERMAN_PIN = "ThinkAgain";
-
+	public static String REQUEST_PARAMETER_HTTP_HEADER_PREFIX ="TRUE_HEADER_";
+	
 	public static void printSysErrWithTimeAndOptionalReason(
 			String errorLocation, String errorDetailsInput) {
 
@@ -336,5 +345,11 @@ public class VarUtils {
 			models.utils.LogUtils.printLogError("OBJ is NULL IN " + errorLocation + errorDetails + " at "
 					+ DateUtils.getNowDateTimeStrSdsm());
 	}// end func
+	
+	public static boolean PRINT_HTTP_TRUE_HEADER_MAP = 	ConfUtils.getBooleanFromApplicationConfVarValue("PRINT_HEADER_IN_LOG");
+
+	public static final String STR_HTTP_HEADER_TYPE_LBMS = "HEADER_LBMS";
+	public static final String STR_HTTP_HEADER_TYPE_LBMS_ASYNC = "HEADER_LBMS_ASYNC";
+	public static final String STR_HTTP_HEADER_TYPE_UDNS = "HEADER_UDNS";
 
 }

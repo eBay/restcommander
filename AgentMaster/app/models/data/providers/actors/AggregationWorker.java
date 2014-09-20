@@ -39,10 +39,8 @@ import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
 import akka.actor.Actor;
 import akka.actor.ActorRef;
-//import akka.actor.PoisonPill;
 import akka.actor.Props;
 import akka.actor.UntypedActor;
-import akka.actor.UntypedActorFactory;
 
 import models.data.NodeData;
 import models.data.providers.AgentDataAggregator;

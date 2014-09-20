@@ -17,17 +17,17 @@ limitations under the License.
 */
 package models.asynchttp.request;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import models.asynchttp.HttpMethod;
 import models.asynchttp.response.AgentResponse;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-/**
- * 
- * @author ypei
- *
- */
-public abstract class AgentRequest {
+
+public abstract class AgentRequest implements Serializable{
 	private final int maxTries;
 	private final long retryIntervalMillis;
 	private final long pollIntervalMillis;
@@ -37,26 +37,14 @@ public abstract class AgentRequest {
 	private final Class<? extends AgentResponse> responseType;
 	private final long pauseIntervalBeforeSendMillis;
 
-	public AgentRequest(int maxTries, long retryIntervalMillis,
-			long pollIntervalMillis, int maxOperationTimeSeconds,
-			int statusChangeTimeoutSeconds, boolean pollable,
-			Class<? extends AgentResponse> responseType) {
-		super();
-		this.maxTries = maxTries;
-		this.retryIntervalMillis = retryIntervalMillis;
-		this.pollIntervalMillis = pollIntervalMillis;
-		this.maxOperationTimeSeconds = maxOperationTimeSeconds;
-		this.statusChangeTimeoutSeconds = statusChangeTimeoutSeconds;
-		this.pollable = pollable;
-		this.responseType = responseType;
-		this.pauseIntervalBeforeSendMillis = 0L;
-	}
-
+	private final Map<String, String> httpHeaderMap = new HashMap<String,String>();
 	public AgentRequest(int maxTries, long retryIntervalMillis,
 			long pollIntervalMillis, int maxOperationTimeSeconds,
 			int statusChangeTimeoutSeconds, boolean pollable,
 			Class<? extends AgentResponse> responseType,
-			long pauseIntervalBeforeSendMillis) {
+			long pauseIntervalBeforeSendMillis,
+			Map<String, String> httpHeaderMap
+			) {
 		super();
 		this.maxTries = maxTries;
 		this.retryIntervalMillis = retryIntervalMillis;
@@ -66,6 +54,7 @@ public abstract class AgentRequest {
 		this.pollable = pollable;
 		this.responseType = responseType;
 		this.pauseIntervalBeforeSendMillis = pauseIntervalBeforeSendMillis;
+		this.httpHeaderMap.putAll(httpHeaderMap);
 	}
 
 	@JsonIgnore
@@ -115,6 +104,11 @@ public abstract class AgentRequest {
 	@JsonIgnore
 	public long getPauseIntervalBeforeSendMillis() {
 		return pauseIntervalBeforeSendMillis;
+	}
+
+	@JsonIgnore
+	public Map<String, String> getHttpHeaderMap() {
+		return httpHeaderMap;
 	}
 
 	@Override

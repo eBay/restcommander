@@ -36,6 +36,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import models.agent.batch.commands.message.BatchResponseFromManager;
+import models.agent.batch.commands.message.GenericResponseFromDirector;
 import models.data.AgentCommandMetadata;
 import models.data.JsonResult;
 import models.data.NodeGroupSourceMetadata;
@@ -57,7 +58,6 @@ import models.utils.AgentUtils;
 import models.utils.DateUtils;
 import models.utils.MyHttpUtils;
 import models.utils.VarUtils;
-
 import play.mvc.Controller;
 import play.mvc.results.Error;
 
@@ -653,4 +653,33 @@ public class Commands extends Controller {
 
 	}// end func
 
+
+	/**
+	 * @author chunyang
+	 * @param nodeGroupType
+	 * @param agentCommandType
+	 * @param token
+	 * 
+	 * for async polling
+	 */
+	
+	public static String generateUpdateSendAgentCommandToNodeGroupForAsyncPolling(
+			String nodeGroupType, String agentCommandType, boolean localMode, boolean failOver, int maxConcNum) {
+
+		try {
+
+			GenericResponseFromDirector response = AgentCommandProvider
+					.generateUpdateSendAgentCommandToNodeGroupPredefined(
+							nodeGroupType, agentCommandType, localMode, failOver, maxConcNum);
+
+			
+			return response.directorJobUuid;
+		} catch (Throwable t) {
+
+			error(	"Error occured in generateUpdateSendAgentCommandToNodeGroup: " + t.getLocalizedMessage()
+					+ " at: " + DateUtils.getNowDateTimeStrSdsm()
+					);
+			return "";
+		}
+	}
 }

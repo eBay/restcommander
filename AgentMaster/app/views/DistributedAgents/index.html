@@ -1,0 +1,530 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+<div class="container">
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script  type="text/javascript">
+		
+    var generateIcon=function(healthStr){
+   	
+					var	iconDiskHealthy="";
+					
+					if(healthStr==true){
+						iconDiskHealthy=" <i class=\"icon-ok\"></i>"
+					}else{
+						iconDiskHealthy=" <i class=\"icon-remove\"></i>"
+					}
+					document.write(iconDiskHealthy);
+					
+    }
+    </script>
+
+<!--<h2>Command Index</h2>-->
+<div id="ClusterLoad" style="min-width: 310px; height: 300px; margin: 30px auto"></div>
+
+<div id="ClusterState" style="min-width: 310px; height: 300px; margin: 30px auto"></div>
+
+
+
+<a class="btn btn-primary btn-lg" style="margin:0 auto" href="/distributedagents/home">
+	Manage Cluster
+</a>
+<button class="btn btn-primary btn-lg" id="CreateCommand" style="margin:0 auto">
+	Create Task
+</button>
+<a class="btn btn-danger btn-lg" style="margin:0 auto" href="/distributedagents/resetscheduler" target="_blank">
+	Clear Waiting Tasks
+</a>
+
+<div id="CommandForm" hidden="hidden" style="margin: auto auto; width : 700px;">
+<div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="targetNodes">Target Node Group</label>
+    <div class="controls">
+      <input type="text" id="targetNodes" placeholder="Target Node Group">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="commands">Command</label>
+    <div class="controls">
+      <input type="text" id="commands" placeholder="Command">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox" id="localMode"> Disable Distributed
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="notFailOver"> Disable Failover
+      </label>
+     	<label>
+  			Max Concurrent Jobs : 
+  			<input id="maxConcNum" style="width:30%" value="500">
+  		</label>
+      <button class="btn" id="createTask">Submmit</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<text x="585" text-anchor="middle" class="highcharts-title" style="color:#333333;font-size:18px;fill:#333333;width:1106px;" y="25">
+	<center><tspan>Task Queue</tspan></center>
+</text>
+
+<table class="table table-striped" >
+   
+   <thead>
+      <tr>
+      	<th>#</th>
+       	<th>Id</th>
+        <th>Target Node</th>
+        <th>Command</th>
+        <th>Max Concurrency</th>
+        <th>Start Time</th>
+        <th>State</th>
+      </tr>
+   </thead>
+   <tbody id="jobQ">
+      
+   </tbody>
+</table>
+
+
+
+</div>
+
+<script type="text/javascript" src="@{'/public/javascripts/selectize.js'}"></script>
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/selectize.bootstrap2.css'}" />
+
+	#{include 'Application/footer.html'/}
+<script>
+$(function() {
+
+	var nodeGroupSourceMetadataListJsonArrayOld = "${nodeGroupSourceMetadataListJsonArray}";
+	var nodeGroupSourceMetadataListJsonArrayNew = nodeGroupSourceMetadataListJsonArrayOld.replace(/&quot;/g, '\"');
+	//console.log("!!!outside loop nodeGroupSourceMetadataListJsonArrayNew:" + nodeGroupSourceMetadataListJsonArrayNew  )
+	//alert(nodeGroupSourceMetadataListJsonArrayOld);
+	
+	var targetNodes = [];
+    
+    obj = $.parseJSON(nodeGroupSourceMetadataListJsonArrayNew);
+    for (i=0; i<obj.length; i++) {
+    	targetNodes.push({'id' : obj[i].nodeGroupType});
+    }
+    
+    $( "#targetNodes" ).selectize({
+    	maxItems: 1,
+	   	valueField: 'id',
+    	labelField: 'id',
+    	searchField: 'id',
+	    sortField: {
+	        field: 'id',
+	        direction: 'asc'
+	    },
+	    options : targetNodes
+	    }	   
+    );
+	
+	
+	var agentCommandMetadataListJsonArrayOld = "${agentCommandMetadataListJsonArray}";
+	var agentCommandMetadataListJsonArrayNew = agentCommandMetadataListJsonArrayOld.replace(/&quot;/g, '\"');
+
+	var commands = [];
+    
+    obj = $.parseJSON(agentCommandMetadataListJsonArrayNew);
+    for (i=0; i<obj.length; i++) {
+    	commands.push({'id' : obj[i].agentCommandType});
+    }
+    
+    $("#commands").selectize({
+    	maxItems: 1,
+	   	valueField: 'id',
+    	labelField: 'id',
+    	searchField: 'id',
+	    sortField: {
+	        field: 'id',
+	        direction: 'asc'
+	    },
+	    options : commands
+	    }	   
+    );
+    $('#select-beast').selectize({
+    create: true,
+    sortField: {
+        field: 'text',
+        direction: 'asc'
+    },
+    dropdownParent: 'body'
+});
+
+	Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+        
+	$('#ClusterLoad').highcharts({
+        chart: {
+            type: 'areaspline',
+            animation: true
+        },
+        title: {
+            text: 'Workload'
+        },
+        xAxis: {
+             type: 'datetime',
+             tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Concurrent Job #'
+            }
+        },
+        tooltip: {
+             formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+        },
+         exporting : {
+			enabled : false
+		},
+		credits : {
+			enabled : false
+		},
+        plotOptions: {
+            areaspline: {
+                stacking:'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+					enabled : false
+				}
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'top',
+            verticalAlign: 'top',
+            x: 800,
+            y: 30,
+            floating: false,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        series: [{
+            name: 'Total Work Load',
+            data: (function () {
+                    // generate an array of random data
+                    var data = [],
+                        time = (new Date()).getTime(),
+                        i;
+
+                    for (i = -59; i <= 0; i += 1) {
+                        data.push({
+                            x: time + i * 1000,
+                            y: 0
+                            })
+                    }
+                    return data;
+                }())
+        }]
+    });
+
+	 $('#ClusterState').highcharts({
+        chart: {
+            type: 'bar',
+            animation: true
+        },
+     
+        title: {
+            text: 'Capacity Usage'
+        },
+        xAxis: {
+            categories: ['Null']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Capacity Usage Percentage'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        exporting : {
+			enabled : false
+		},
+		credits : {
+			enabled : false
+		},
+        legend: {
+            layout: 'vertical',
+            align: 'top',
+            verticalAlign: 'top',
+            x: 800,
+            y: 30,
+            floating: false,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    'Total Capacity: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black, 0 0 3px black'
+                    }
+                },
+                marker: {
+					enabled : false
+				}
+            },
+            series: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Available Capacity',
+            data: [0]
+        }]
+    });
+    
+    var timer0 = setInterval(function(){	 
+			$.post("/distributedagents/queryClusterState",
+				   function(text){
+				     	//alert(data);
+				     	var data = null;
+				     	if (text != '')
+				     		data= eval('(' + text + ')');
+				     	
+				    	var chart = $('#ClusterState').highcharts();
+				    	var totUsage = 0;
+				    	var chart1 = $('#ClusterLoad').highcharts();
+				    	if (data != null) {
+				    		chart.xAxis[0].update({categories: data['names']});
+				    	
+				    	var liveS = new Array(chart.series.length);
+				    	
+				    	for (var i=0; i<liveS.length; i++) {
+				    		liveS[i] = false;
+				    	}
+				    		
+				    	liveS[0] = true;
+				    	
+				    	
+				    	var nodeUsage = new Array(data['names'].length);
+				    	
+				    	for (var i=0; i<nodeUsage.length; i++) {
+				    		nodeUsage[i] = 0;
+				    	}
+				    	
+				    	for (s in data) {
+				    		if (s!='names') {
+				    			var temp = new Array(); 
+				    			for (t in data[s]) {
+				    				temp.push(parseInt(data[s][t]));
+				    				totUsage += parseInt(data[s][t]);
+				    				nodeUsage[t] += parseInt(data[s][t]);
+				    			}
+				    			var exist = false;
+				    			for (i in chart.series) {
+				    				if (chart.series[i].name == s) {
+				    					exist = true;
+				    					liveS[i] = true;
+				    					chart.series[i].update({
+				    						name : s,
+				    						data : temp
+				    					});
+				    				} 
+				    			}
+				    			if (!exist)
+					    			chart.addSeries({
+					    				name : s,
+					    				data :temp 
+					    			});
+				    		}
+				    	}
+
+				    	for (i in liveS) {
+				    		if (liveS[i] == false)
+				    			chart.series[i].remove() 
+				    	}
+				    		
+				    	var temp = new Array();
+				    	
+				    	for (i in data['names'])
+				    		temp.push(2500-nodeUsage[i]);
+				    		
+				    	chart.series[0].update({
+				    		name : "Available Capacity",
+				    		data : temp
+				    	});
+				    	
+				    	//update Cluster Load Chart
+				    	liveS = new Array(chart1.series.length);
+				    	
+				    	for (var i=0; i<liveS.length; i++) {
+				    		liveS[i] = false;
+				    	}
+				    	
+				    	liveS[0] = true;
+				    	
+				    	var x = (new Date()).getTime();
+				    	
+				    	for (job in data) {
+				    		if (job != 'names') {
+				    			var temp = 0; 
+				    			for (t in data[job]) {
+				    				temp += parseInt(data[job][t]);
+				    			}
+				    			var exist = false;
+				    			for (i in chart1.series) {
+				    				if (chart1.series[i].name == job) {
+				    					exist = true;
+				    					liveS[i] = true;
+				    					chart1.series[i].addPoint([x, temp], true, true);
+				    				} 
+				    			}
+				    			if (!exist)
+					    			chart1.addSeries({
+					    				name : job,
+					    				data :  (function () {
+								                    // generate an array of random data
+								                    var data = [],
+								                        time = (new Date()).getTime(),
+								                        i;
+								                    for (i = -58; i <= 0; i += 1) {
+								                        data.push({
+								                            x: time + i * 1000,
+								                            y: 0
+								                            })
+								                    }
+								                    data.push({
+								                    	x : time,
+								                    	y : temp
+								                    })
+								                    return data;
+								                }())
+					    			});
+				    		}
+				    	}
+				    	
+				    	for (i in liveS) {
+				    		if (liveS[i] == false)
+				    			chart1.series[i].remove() 
+				    	}
+				    	}
+                        var y = totUsage;
+                        chart1.series[0].addPoint([(new Date()).getTime(), y], true, true);
+				   });
+		
+		}
+	 , 1000);	
+	 var timer1 = setInterval(function(){	 	
+			$.post("/distributedagents/queryJobQ",
+				   function(data){
+				     	//alert(data);
+				    	//showBar(eval(data));
+				    	showTable(data);
+				   });
+		}
+	 , 1000);
+});
+
+$( "#CreateCommand" ).click(function() {
+  if ( $( "#CommandForm" ).is(":hidden") || $( "#CommandForm" ).css("display") == '' || $( "#CommandForm" ).css("display") == 'none')
+  	$(this).text("Hide Form");
+  else
+  	$(this).text("Create Task");
+  	
+  $( "#CommandForm" ).toggle( "slow" );
+  	
+});
+
+$("#createTask").click(function() {
+	 $( "#CommandForm" ).hide( "slow" );
+	 $( "#CreateCommand" ).text("Create Task");
+	var submitData = {
+			"nodeGroupType": $("#targetNodes").val(),
+			"agentCommandType": $("#commands").val(),
+			"localMode" : $("#localMode").is(':checked'),
+			"failOver" : !($("#notFailOver").is(':checked')),
+			"maxConcNum" : $("#maxConcNum").val()
+	};
+	
+	 $.ajax({
+	        url: "/commands/generateUpdateSendAgentCommandToNodeGroupForAsyncPolling",
+	        type: "POST",
+	        data: submitData,
+	        timeout: 1800000,
+	        success: function(data) {
+	            //wizard.submitSuccess(); // displays the success card
+	            //wizard.hideButtons(); // hides the next and back buttons         
+	          	//alert(data);
+	          	//token = data;
+	        },
+	        
+	        error: function (xhr, ajaxOptions, thrownError) {
+	        	
+	        	errorSummary = "HTTP error status: " + xhr.status
+	            +" ThrowError: " + thrownError;
+	            
+	            $(".alert-error")
+	            .append("<strong>Error Summary:</strong><br/>")
+	            .append(errorSummary)
+	            .append("<br/><strong>Detail Error Message:</strong><br/>")
+	            .append(xhr.responseText);
+	    	}
+	    });		
+});
+
+function showTable(text) {
+	if (text == "")
+		return;
+	data = eval('(' + text + ')');
+	var table = $('#jobQ');
+	table.html("");
+	for (var i = data.length-1; i>=0; i--) {
+		var tr = $("<tr></tr>");
+		tr.append($("<td>" + (data.length-1-i).toString() + "</td>"));
+		tr.append($("<td><a href='/distributedagents/detail?jobId=" + data[i]['jobId'] + "' target='_blank'>" + data[i]['jobId'] + "</a></td>"));
+		tr.append($("<td>" + data[i]['nodeGroupType'] + "</td>"));
+		tr.append($("<td>" + data[i]['agentCommandType'] + "</td>"));
+		tr.append($("<td>" + data[i]['maxConcNum'] + "</td>"));
+		tr.append($("<td>" + data[i]['timeStamp'] + "</td>"));
+		tr.append($("<td>" + data[i]['state'] + "</td>"));
+		
+		if (data[i]['state'] == 'gathered') {
+			tr.addClass('success');
+		}
+		if (data[i]['state'] == 'processing' || data[i]['state'] == 'finishedNotGathered') {
+			tr.addClass('warning');
+		}
+		tr.appendTo(table);
+	}
+}
+
+
+</script>
+</body>
+</html>

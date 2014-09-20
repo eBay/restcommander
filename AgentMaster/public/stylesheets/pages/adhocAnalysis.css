@@ -1,0 +1,7 @@
+#tagTree.treeview ul {
+	background-color: whiteSmoke;
+}
+
+#filtersTbl tbody tr {
+	cursor: pointer;
+}

@@ -1,0 +1,300 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+#{include 'Agents/agentsnav.html'/}
+
+ <div class="progressChart" style="width:500px; margin: 60px auto;" >
+	 <text x="585" text-anchor="middle" class="highcharts-title" style="color:#333333;font-size:18px;fill:#333333;width:1106px;" y="25">
+		<center><tspan> Job Progress</tspan></center>
+		<center><tspan> ${jobId}</tspan></center>
+	</text>
+	<div style="width:250px; margin: 0px auto;">
+		<input class="totChart" value="35" data-skin="tron" data-thickness=".1" data-step="0.001">
+	</div>
+</div>
+<div id="slaveProgress" style="min-width: 310px; max-width: 1000px; height: 400px; margin: 0 auto;"></div>
+<div style = "margin: 60px auto; width:600px">
+	<p><b>Search Response according to FQDN: </b><input type="text" id="fqdn"></p>
+	<button type="button" class="btn btn-primary btn-lg active" id="searchFqdn">Search</button>
+	<button type="button" class="btn btn-primary btn-lg active" id="toggleSearchResult">Hide Search Result</button>
+	<p style=" margin : 10px" id="searchResult" hidden="hidden"> No result </p>
+</div>
+<div class="responsearea" style="width:600px; margin: 60px auto;"></div>
+
+
+#{include 'Application/footer.html'/}
+
+
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.knob.min.js'}"></script>
+<script>
+$(function() {
+	var jobId = "${jobId}";
+	//alert(jobId);
+	$(".totChart").knob({
+                    change : function (value) {
+                        //console.log("change : " + value);
+                    },
+                    release : function (value) {
+                        //console.log(this.$.attr('value'));
+                        //console.log("release : " + value);
+                        return
+                    },
+                    width : 250,
+                    height : 250,
+                    cancel : function () {
+                        console.log("cancel : ", this);
+                    },
+                    format : function (value) {
+                        return Math.round(value*1000)/1000 + '%';
+                    },
+                    draw : function () {
+
+                        // "tron" case
+                        if(this.$.data('skin') == 'tron') {
+
+                            this.cursorExt = 0.3;
+
+                            var a = this.arc(this.cv)  // Arc
+                                , pa                   // Previous arc
+                                , r = 1;
+
+                            this.g.lineWidth = this.lineWidth;
+
+                            if (this.o.displayPrevious) {
+                                pa = this.arc(this.v);
+                                this.g.beginPath();
+                                this.g.strokeStyle = this.pColor;
+                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                                this.g.stroke();
+                            }
+
+                            this.g.beginPath();
+                            this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                            this.g.stroke();
+
+                            this.g.lineWidth = 2;
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.o.fgColor;
+                            this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                            this.g.stroke();
+
+                            return false;
+                        }
+                    }
+                });
+	 $(".totChart").css('font-size','30px');
+	 $('#slaveProgress').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Slave Load & Progress'
+        },
+        xAxis: {
+            categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'],
+            labels:{  
+                formatter:function(){  
+                    return this.value.slice(0,60)
+                }  
+            }  
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '# of Job'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        tooltip: {
+            headerFormat: ""
+        }
+    });
+	
+	function query(){
+		
+		
+		var resultDisplayed = false;
+		
+		var timer = setInterval(function(){	 
+			$.post("/distributedagents/queryProgress", { jobId : jobId},
+				   function(data){
+				    	$('.totChart')
+    						.val(data*100)
+    						.trigger('change');
+				      	if (data == 1) {
+				    		clearInterval(timer); 	
+				    		$('.totChart')
+    							.val(data*100)
+    							.trigger('change');
+				    		if (resultDisplayed == false) {
+				    			resultDisplayed = true;	
+				    			showResult(jobId);
+				    		}
+				     	}
+				   });
+			$.post("/distributedagents/queryWorkerLoad", { jobId : jobId},
+				   function(data){
+				    	showReceived(data);
+				   });
+		}
+	 , 500);		
+	}
+	
+	query();
+	
+	$("#searchFqdn").click(function() {
+		
+	
+		$.post("/distributedagents/searchFqdn", { jobId : jobId, fqdn : $('#fqdn').val()},
+			function(text){
+				//alert(text);
+				$('#searchResult').text(text);
+				
+  				$('#toggleSearchResult').text("Hide Search Result");
+				$("#searchResult").show("slow");
+			});
+	});
+	
+	$('#toggleSearchResult').click(function() {
+		if ( $( "#searchResult" ).is(":hidden") || $( "#searchResult" ).css("display") == '' || $( "#searchResult" ).css("display") == 'none')
+  			$(this).text("Hide Search Result");
+  			else
+  			$(this).text("Show Search Result");
+  	
+  		$( "#searchResult" ).toggle( "slow" );
+	})
+
+});
+
+
+
+function showReceived(text) {
+	data = eval('(' + text + ')')
+	
+	var chart = $('#slaveProgress').highcharts();
+	
+	chart.xAxis[0].update({categories: data['names']});
+		    	
+				    	
+	for (s in data) {
+		if (s!='names' && s!='status') {
+			var temp = new Array(); 
+			for (t in data[s]) {
+				temp.push(parseInt(data[s][t]));
+			}
+			var exist = false;
+			var displayName = s=='loads'? 'Response Received' : 'Total Requests'; 
+			for (i in chart.series) {
+				if (chart.series[i].name == displayName) {
+					exist = true;
+				   	chart.series[i].update({
+				    	name : displayName,
+				    	data : temp,
+				    	stack : displayName
+				   	});
+				} 
+			}
+			if (!exist)
+				chart.addSeries({
+					name : displayName,
+					data :temp ,
+				    stack : displayName,
+				    color : s=='loads'? '#66CC66' : 'rgb(135, 206, 235)'
+				});
+		}
+	}
+}
+
+function showResult(token) {
+	
+	var nodeGroupType = "";
+	var agentCommandType = "";
+	
+	$.post("/distributedagents/queryJobInfo", { jobId : token},
+		function(text){
+			data = eval('(' + text + ')')
+			nodeGroupType = data['nodeGroupType'];
+			agentCommandType = data['agentCommandType'];
+		}
+	);
+	
+	var placeHolder = $("<p><b> Gathering Result ... </b></p>");
+	
+	placeHolder.appendTo($(".responsearea"));
+	
+	var aggregationDisplayed = false;
+	var totTime = 0;
+	
+	var timer = setInterval(function(){	 
+		$.post("/distributedagents/queryJobInfo", { jobId : token}, 
+			function(text) {
+				data = eval('(' + text + ')');
+				if (data.state == "gathered") {
+					aggregationDisplayed = true;
+					totTime = (parseInt(data['endTime']) - parseInt(data['startTime']))/1000.0;
+					clearInterval(timer);
+					placeHolder.html("<b>Aggregation Time : " + data.aggregationTime + "s</b>");
+					$("<b> Total Time : " + totTime + "s</b>").appendTo($(".responsearea"));
+					showAggregation();	
+				}
+			}
+		);}
+	, 500);
+		
+	function showAggregation() {
+				
+		var div1 = $("<div></div>");
+		div1.appendTo($(".responsearea"));
+	
+		var div2 = $("<div></div>");
+		div2.appendTo($(".responsearea"));
+	
+		var button1 = "<input type='button'  class='btn btn-large' value='ResponseData' />";
+		var link1 = "/agents/getAgentData?nodeGroupType="	+ nodeGroupType + "&agentCommandType=" +agentCommandType;
+					
+		var button2 = "<input type='button'  class='btn btn-large' value='Pie chart' />";
+		var link2 = "/agents/aggregatePieChart?nodeGroupType="
+					+ nodeGroupType + "&agentCommandType=" +agentCommandType + "&rawDataSourceType=ALL_AGENT_DATA&aggrRule=SUPERMAN_SPECIAL_STATUS_CODE";
+					
+		var button3 = "<input type='button'  class='btn btn-large' value='Aggregation in text' />";
+		var link3 = "/agents/aggregatePieChart?textOnly=true&nodeGroupType="
+								+ nodeGroupType + "&agentCommandType=" +agentCommandType + "&rawDataSourceType=ALL_AGENT_DATA&aggrRule=SUPERMAN_SPECIAL_STATUS_CODE";
+					
+		var button4 = "<input type='button'  class='btn btn-large' value='Edit Aggregation' />";
+		var link4 = "/config/editConfig/aggregation";
+		
+					
+		$(button1).appendTo(div1)
+			.click(function() {
+				window.open(link1)
+			}).css("width", 250)
+		$(button2).appendTo(div1)
+			.click(function() {
+				window.open(link2)
+			}).css("width", 250)
+		$(button3).appendTo(div2)
+			.click(function() {
+				window.open(link3)
+			}).css("width", 250)
+		$(button4).appendTo(div2)
+			.click(function() {
+				window.open(link4)
+			}).css("width", 250)
+		
+			
+	}
+}
+</script>
+</body>
+</html>

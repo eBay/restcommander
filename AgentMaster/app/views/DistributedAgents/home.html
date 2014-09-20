@@ -1,0 +1,91 @@
+#{include 'Application/top_head.html'/}
+#{include 'Application/top_nav.html'/}
+
+
+<div class="container">
+#{include 'Agents/agentsnav.html'/}
+
+<form name="input" action="/distributedagents/transform" method="get" align="center" font-family="Georgia">
+	<p>Node Port: <input type="text" id="port"></p>
+	<p>Master Url: <input type="text" id="masterUrl"></p>
+	<button type="button" class="btn btn-primary btn-lg active" id="createName">Create</button>
+</form>
+<em>Master Url : </em>
+<div id="masterUrlTag">No Master</div>
+
+<table class="table table-striped" >
+   
+   <thead>
+      <tr>
+      	<th>#</th>
+       	<th>Slaves</th>
+        <th>Available</th>
+        <th>Maintain</th>
+      </tr>
+   </thead>
+   <tbody id="slaveList">
+      
+   </tbody>
+</table>
+#{include 'Application/footer.html'/}
+
+
+</div>
+</body>
+<script>
+	function myFunction()
+	{	
+		 var timer1 = setInterval(function(){	 	
+			$.post("/distributedagents/getClusterList",
+				   function(data){
+				    	showTable(data);
+				   });
+			}
+	 	, 2000);
+	 	
+	 	function showTable(text) {
+			if (text == "")
+				return;
+			data = eval('(' + text + ')');
+			var table = $('#slaveList');
+			table.html("");
+			
+			$('#masterUrlTag').text(data['masterUrl'][0]);
+			for (var i = data['url'].length-1; i>=0; i--) {
+				var tr = $("<tr></tr>");
+				tr.append($("<td>" + (data['url'].length-1-i).toString() + "</td>"));
+				tr.append($("<td>" + data['url'][i] + "</td>"));
+				tr.append($("<td>" + data['state'][i] + "</td>"));
+				if (data['enable'][i] == 'true') {
+					tr.append($("<td><a href='/distributedagents/disableClusterMember?url=" + data['url'][i].substr(0, data['url'][i].length-5) + "&port=" + data['url'][i].substr(data['url'][i].length-4,4) + "' target='_blank'>Disable</a></td>"));
+				} else {
+					tr.append($("<td><a href='/distributedagents/enableClusterMember?url=" + data['url'][i].substr(0, data['url'][i].length-5) + "&port=" + data['url'][i].substr(data['url'][i].length-4,4) + "' target='_blank'>Enable</button></td>"));
+				}
+				
+				tr.appendTo(table);
+			}
+		}
+	}
+	$(document).ready(myFunction);
+	$("#createName").click(function() {
+		if ($("#createName").hasClass("btn-primary"))
+		{
+			$("#createName").removeClass("btn-primary").addClass("btn-warning").text("Creating")
+			$.post("/distributedagents/createNode", { port : $("#port").val(), masterUrl : $("#masterUrl").val()}, 
+			   function(){
+			     	$("#createName").removeClass("btn-warning").addClass("btn-danger").text("Shut Down")
+			   });
+		} else	if($("#createName").hasClass("btn-danger")) {
+			$.post("/distributedagents/shutdownnode", {}, 
+			   function(){
+			     	$("#createName").removeClass("btn-danger").addClass("btn-primary").text("Create")
+			     	alert("shutdown");
+			   });
+		}
+	});
+
+</script>
+</html>
+
+
+

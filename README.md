@@ -203,9 +203,9 @@ We restructure REST Commander via AKKA remoting and clustering.  Detailed inform
 * Search response according to FQDN.
 
 ####Workflow & Architecture
-**The main workflow of distributed REST Commander is shown as below.**
+The main workflow of distributed REST Commander is shown as below.**
 
 ![Work Flow](/workflow.jpg)
 
-**Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
+Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
 

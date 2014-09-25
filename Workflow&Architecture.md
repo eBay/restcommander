@@ -1,5 +1,5 @@
 
-Workflow & Architect : restructure via AKKA to achieve horizontal scalability
+Workflow & Architecture : restructure via AKKA to achieve horizontal scalability
 ==========
 [Overview](#a_overview) | [Actors](#a_actors) |  [Messages](#a_messages)
 

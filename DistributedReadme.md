@@ -6,9 +6,8 @@ Distributed Version R
 ## Overview
 HTTP/REST/SOAP client as a service.
 
-* Generic discovery, monitoring, software deployment, configuration management
 * Fast and scalable concurrent task execution on 100,000+ machines (HTTP and SSH).
-* Restructure via AKKA Cluster to make it horizontally scalable.
+* Restructure via AKKA Cluster & Remote to make it horizontally scalable.
 
 <a name="a_new_features"></a>
 ##New Features

@@ -7,6 +7,8 @@ REST Commander is a fast parallel async HTTP/REST/SOAP client as a service to mo
 
 REST Commander serves as the agent master of [cronus agent (open sourced)](https://github.com/eBay/cronusagent) for scalable software deployment, script execution, config push, and monitoring. 
 
+**Version 2.0.0 : faster than faster**, by restructuring via AKKA remoting and clustering, we are able to make REST Commander distributed and horizontally scalable.  Distributed REST Commander can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
+
 [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
 
 Recent Activities: [20140722](https://github.com/eBay/restcommander/wiki/Recent-Activities-20140722). We are able to horizontally scale Commander with Akka Clustering (pending release).

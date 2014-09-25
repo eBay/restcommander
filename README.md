@@ -203,7 +203,7 @@ We restructure REST Commander via AKKA remoting and clustering.  Detailed inform
 * Search response according to FQDN.
 
 ####Workflow & Architecture
-The main workflow of distributed REST Commander is shown as below.**
+The main workflow of distributed REST Commander is shown as below.
 
 ![Work Flow](/workflow.jpg)
 

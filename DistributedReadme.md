@@ -1,4 +1,4 @@
-Distributed Version R
+Distributed REST Commander README
 ============
 
 [Overview](#a_overview) | [New Features](#a_new_features) |  [Terminoloy](#a_terminology) |  [New APIs](#a_new_apis) | [Deployment](#a_deployment) 

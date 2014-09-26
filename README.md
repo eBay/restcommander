@@ -9,11 +9,43 @@ REST Commander serves as the agent master of [cronus agent (open sourced)](https
 
 **Version 2.0.0 : faster than faster**, by restructuring via AKKA remoting and clustering, we are able to make REST Commander distributed and horizontally scalable.  Distributed REST Commander can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
 
-[What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) | [Version 2.0.0](#a_V2)
+[Version 2.0.0](#a_V2) | [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions)
 
 REST Commander has been in **[top 10 trending](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
+
+<a name="a_V2"></a>
+
+###Version 2.0.0 : distributed REST Commander
+
+We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md).
+
+####New Features
+**Speed**
+* By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
+
+**Reliability**
+* Failover automatically to other slave nodes in case of a failure on slave node.  
+* Slave nodes can also automatically adjust speed of sending request to handle network congestion between master and slave.
+* One HTTP call to restart the whole distributed cluster and assign new master.
+
+**Scheduling**
+* Since most tasks are quite small, we provide scheduling to handle multitasks to fully use capacity and ensure reliability at the same time.
+* Just uses greedy scheduling algorithm in a first-come-first-serve way.
+
+**Visibility**
+* Real time show workload and available capacity of each slave node.
+* Real time track task progress.
+* Search response according to FQDN.
+
+####Workflow & Architecture
+The main workflow of distributed REST Commander is shown as below.
+
+![Work Flow](/workflow.jpg)
+
+Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
+
 <a name="a_whatAndWhy"></a>
 ###What is REST Commander and Why I need it?
 
@@ -171,38 +203,5 @@ Response:
 		]
 	}
 
-<a name="a_V2"></a>
 
-###Version 2.0.0 : distributed REST Commander
-
-We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md).
-
-####New Features
-**Speed**
-
-* By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
-
-**Reliability**
-
-* Failover automatically to other slave nodes in case of a failure on slave node.  
-* Slave nodes can also automatically adjust speed of sending request to handle network congestion between master and slave.
-* One HTTP call to restart the whole distributed cluster and assign new master.
-
-**Scheduling**
-
-* Since most tasks are quite small, we provide scheduling to handle multitasks to fully use capacity and ensure reliability at the same time.
-* Just uses greedy scheduling algorithm in a first-come-first-serve way.
-
-**Visibility**
-
-* Real time show workload and available capacity of each slave node.
-* Real time track task progress.
-* Search response according to FQDN.
-
-####Workflow & Architecture
-The main workflow of distributed REST Commander is shown as below.
-
-![Work Flow](/workflow.jpg)
-
-Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
 

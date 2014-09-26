@@ -23,8 +23,8 @@ We restructure REST Commander via AKKA remoting and clustering.  Detailed inform
 
 ####New Features
 * **Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
-* **Reliability :** Automatically failover to handle failure on slave node, and adjust sending speed to handle network congestion.
-* **Scheduling :** Provide task scheduling to handle multitasks, fully use capacity and ensure reliability.
+* **Reliability :** Automatically failover in case of failure on slave node, and adjust sending speed to avoid network congestion.
+* **Scheduling :** Provide task scheduling to handle multitasks.
 * **Visibility :** Show workload and available capacity of each slave node, track task progress.
 
 ####Workflow & Architecture

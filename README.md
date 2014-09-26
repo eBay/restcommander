@@ -22,13 +22,13 @@ REST Commander has been in **[top 10 trending](http://www.restcommander.com/publ
 We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md).
 
 ####New Features
-**Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
+* **Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
 
-**Reliability :** Automatically failover to handle failure on slave node, and adjust sending speed to handle network congestion.
+* **Reliability :** Automatically failover to handle failure on slave node, and adjust sending speed to handle network congestion.
 
-**Scheduling :** Provide task scheduling to handle multitasks, fully use capacity and ensure reliability.
+* **Scheduling :** Provide task scheduling to handle multitasks, fully use capacity and ensure reliability.
 
-**Visibility :** Show workload and available capacity of each slave node, track task progress.
+* **Visibility :** Show workload and available capacity of each slave node, track task progress.
 
 ####Workflow & Architecture
 The main workflow of distributed REST Commander is shown as below.

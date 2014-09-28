@@ -17,6 +17,7 @@ limitations under the License.
 */
 package models.data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,7 +26,7 @@ import java.util.Map.Entry;
  * @author ypei
  *
  */
-public class NodeData {
+public class NodeData implements Serializable{
 
 	private String fqdn;
 

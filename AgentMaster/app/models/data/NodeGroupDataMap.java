@@ -17,6 +17,7 @@ limitations under the License.
 */
 package models.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ import java.util.Map.Entry;
  * @author ypei
  * 
  */
-public class NodeGroupDataMap {
+public class NodeGroupDataMap implements Serializable{
 
 	private String nodeGroupType;
 

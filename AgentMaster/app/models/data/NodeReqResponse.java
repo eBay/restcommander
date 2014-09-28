@@ -17,6 +17,7 @@ limitations under the License.
 */
 package models.data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ import models.utils.VarUtils;
  * @author ypei
  * 
  */
-public class NodeReqResponse {
+public class NodeReqResponse implements Serializable{
 
 	private final Map<String, String> requestParameters = new HashMap<String, String>();
 
@@ -123,7 +124,7 @@ public class NodeReqResponse {
 		return responseContent;
 	}
 
-	public static class ResponseContent {
+	public static class ResponseContent implements Serializable{
 		private String response;
 		private String responseTime;
 

@@ -48,12 +48,7 @@ public final class SupermanApp {
 		if(!isClusterExist()) {	
 			TransformLocalSystem = new SupermanActorSystem(port, masterUrl);
 			SystemPort = port;
-			// Sleep to detect all actor systems. 
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			
 		}
 	}
 	

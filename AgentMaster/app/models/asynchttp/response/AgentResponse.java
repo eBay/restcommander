@@ -17,6 +17,8 @@ limitations under the License.
 */
 package models.asynchttp.response;
 
+import java.io.Serializable;
+
 import models.asynchttp.RequestProtocol;
 import models.asynchttp.request.AgentRequest;
 
@@ -28,7 +30,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AgentResponse {
+public class AgentResponse implements Serializable{
 	// Response attributes
 	private boolean error = false;
 	private String errorMessage;

@@ -7,14 +7,33 @@ REST Commander is a fast parallel async HTTP/REST/SOAP client as a service to mo
 
 REST Commander serves as the agent master of [cronus agent (open sourced)](https://github.com/eBay/cronusagent) for scalable software deployment, script execution, config push, and monitoring. 
 
-[What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions) 
+**Version 2.0.0 : faster than faster**, by restructuring via AKKA remoting and clustering, we are able to make REST Commander distributed and horizontally scalable.  Distributed REST Commander can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
 
-Recent Activities: [20140722](https://github.com/eBay/restcommander/wiki/Recent-Activities-20140722). We are able to horizontally scale Commander with Akka Clustering (pending release).
-
+[Version 2.0.0](#a_V2) | [What and Why](#a_whatAndWhy) | [Highlights](#a_highlights) | [Performance](#a_performance) | [Run Instructions](#a_runInstructions)
 
 REST Commander has been in **[top 10 trending](http://www.restcommander.com/public/images/superman-8th-github-trending.png)** out of 10 millions+ projects in Github in all languages on 01/21/2014 and 01/22/2014. It has been **[recommended](http://www.restcommander.com/public/images/oschina-recommend.png)** and listed in **[top 20](http://www.restcommander.com/public/images/superman-top-20-oschina.png)** trending out of 28K+ software in [oschina](http://www.oschina.net/p/restsuperman), the largest open source community in China. It has also been featured and front-paged at [InfoQ](http://www.infoq.com/cn/news/2014/03/ebay-released-rest-commander).
 
 ![Structure Overview](https://github.com/ebay/restcommander/raw/master/AgentMaster/public/images/workflow_v3.png)
+
+<a name="a_V2"></a>
+
+###Version 2.0.0 : distributed REST Commander
+
+We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md).
+
+####New Features
+* **Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
+* **Reliability :** Automatically failover in case of failure on slave node, and adjust sending speed to avoid network congestion.
+* **Scheduling :** Provide task scheduling to handle multitasks.
+* **Visibility :** Show workload and available capacity of each slave node, track task progress.
+
+####Workflow & Architecture
+The main workflow of distributed REST Commander is shown as below.
+
+![Work Flow](/workflow.jpg)
+
+Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
+
 <a name="a_whatAndWhy"></a>
 ###What is REST Commander and Why I need it?
 
@@ -172,4 +191,5 @@ Response:
 		]
 	}
 
-	
+
+

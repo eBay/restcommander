@@ -93,17 +93,8 @@ hr.soften {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
-  background: #232890; /* Old browsers */
-  background: -moz-linear-gradient(45deg,  #232890 0%, #07080D 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#232890), color-stop(100%,#07080D)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(45deg,  #232890 0%,#07080D 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(45deg,  #232890 0%,#07080D 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(45deg,  #232890 0%,#07080D 100%); /* IE10+ */
-  background: linear-gradient(45deg,  #232890 0%,#07080D    100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#232890', endColorstr='#07080D',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+  background: #377CA8; /* Old browsers */
+  background-image: url(../img/bg.png);
 }
 .jumbotron h1 {
   font-size: 80px;
@@ -231,6 +222,7 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   padding: 15px 0;
   text-align: center;
   background-color: #f5f5f5;
+  background-image: url(../img/bg2.png);  
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }

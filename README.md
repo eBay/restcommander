@@ -17,9 +17,9 @@ REST Commander has been in **[top 10 trending](http://www.restcommander.com/publ
 
 <a name="a_V2"></a>
 
-###Version 2.0.0 : distributed REST Commander
+###[Version 2.0.0](https://github.com/eBay/restcommander/tree/distributed_commander) : distributed REST Commander 
 
-We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md).
+We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architechture design details at [here](/Workflow%26Architecture.md). See git branch [distributed_commander](https://github.com/eBay/restcommander/tree/distributed_commander). 
 
 ####New Features
 * **Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.

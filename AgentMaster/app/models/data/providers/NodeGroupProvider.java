@@ -132,9 +132,9 @@ public class NodeGroupProvider {
 		
 		// update the dataStore;
 		AgentConfigProvider acp = AgentConfigProvider.getInstance();
-		acp.initAllAgentDataFromNodeGroupSourceMetadatas(
+		acp.addAdhocAgentDataFromNodeGroupSourceMetadatas(
 				AgentDataProvider.adhocAgentData,
-				AgentDataProvider.adhocNodeGroups);
+				AgentDataProvider.adhocNodeGroups, nodeGroupType);
 
 		return nodeGroupType;
 	}

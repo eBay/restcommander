@@ -469,9 +469,6 @@ public class AgentConfigProvider {
 			e.printStackTrace();
 		}
 
-		initAllAgentDataFromNodeGroupSourceMetadatas(
-				AgentDataProvider.allAgentData,
-				AgentDataProvider.nodeGroupSourceMetadatas);
 
 	} // end func.
 
@@ -666,6 +663,51 @@ public class AgentConfigProvider {
 					+ e.getLocalizedMessage());
 		}
 
-	}
+	}// end func
+	
+	
+	/**
+	 * 201501 optimize for adhoc case initialize the NodeGroupDataMap inside of
+	 * AllAgentData
+	 */
+	public void addAdhocAgentDataFromNodeGroupSourceMetadatas(
+			Map<String, NodeGroupDataMap> dataStore,
+			Map<String, NodeGroupSourceMetadata> nodeGroupStore,
+			String nodeGroupType
+
+	) {
+
+		try {
+			NodeGroupSourceMetadata ngsm = nodeGroupStore.get(nodeGroupType);
+
+			if (ngsm == null) {
+				models.utils.LogUtils
+						.printLogError("Error in addAdhocAgentDataFromNodeGroupSourceMetadatas. ngsm is null for node group "
+								+ nodeGroupType);
+				return;
+			}
+
+			if (!dataStore.containsKey(ngsm.getNodeGroupType())
+					|| dataStore.get(ngsm.getNodeGroupType()) == null) {
+				NodeGroupDataMap ngdm = new NodeGroupDataMap(
+						ngsm.getNodeGroupType());
+
+				dataStore.put(ngsm.getNodeGroupType(), ngdm);
+			}
+
+			models.utils.LogUtils
+					.printLogNormal("Completed addAdhocAgentDataFromNodeGroupSourceMetadatas: dataStore with size: "
+							+ dataStore.size()
+							+ " at "
+							+ DateUtils.getNowDateTimeStr());
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			models.utils.LogUtils
+					.printLogError("Error in addAdhocAgentDataFromNodeGroupSourceMetadatas."
+							+ e.getLocalizedMessage());
+		}
+
+	}// end func
 
 }

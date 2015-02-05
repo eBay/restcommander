@@ -315,6 +315,10 @@ public class DBPlugin extends PlayPlugin {
         public boolean jdbcCompliant() {
             return this.driver.jdbcCompliant();
         }
+        
+        public java.util.logging.Logger getParentLogger() {
+			return java.util.logging.Logger.getLogger(java.util.logging.Logger.GLOBAL_LOGGER_NAME);
+		}
     }
 
     public static class PlayConnectionCustomizer implements ConnectionCustomizer {

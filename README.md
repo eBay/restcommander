@@ -5,7 +5,7 @@ Formerly known as REST Superman. **Fire thousands of HTTP requests and aggregate
 
 REST Commander is a fast parallel async HTTP/REST/SOAP client as a service to monitor and manage 10,000s of web servers. Sends requests to 1000 servers with response aggregation in 10 seconds. or 10,000 servers in 50 seconds.
 
-Need **standaone library alternative?**: Try **[Parallec.io](http://www.parallec.io/)** (released 2015.11) as an standaone library alternative to REST Commander : With the feedbacks, lessons, and improvements from the past year of internal usage and open source of **[REST Commander](http://www.restcommander.com)**, we now made the core of REST Commander as an easy to use standalone library. We added **[15+ new](https://github.com/eBay/parallec#compare)** features, rewritten 70%+ of the code, with [**90%+ test coverage**](https://codecov.io/github/eBay/parallec) for confident usage and contribution. 
+Need **standaone library alternative?**: Try **[Parallec.io](http://www.parallec.io/)** (released 2015.11) as a standaone library alternative to REST Commander : With the feedbacks, lessons, and improvements from the past year of internal usage and open source of **[REST Commander](http://www.restcommander.com)**, we now made the core of REST Commander as an easy to use standalone library. We added **[15+ new](https://github.com/eBay/parallec#compare)** features, rewritten 70%+ of the code, with [**90%+ test coverage**](https://codecov.io/github/eBay/parallec) for confident usage and contribution. 
 
 
 

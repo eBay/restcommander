@@ -10,7 +10,7 @@ HTTP/REST/SOAP client as a service.
 * Restructure via AKKA Cluster & Remote to make it horizontally scalable.
 
 <a name="a_new_features"></a>
-##New Features
+## New Features
 ### **Speed**
 
 * By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
@@ -58,7 +58,7 @@ HTTP/REST/SOAP client as a service.
 * For each task we can define max concurrency, which means that how many HTTP request the slave can process at the same time for this task.  Because slave can automatically adjust throttling to handle network congestion, the actual concurrency may be less than the max concurrency.  Moreover, since the total capacity of each slave is 2500, the sum of max concurrency of all the jobs processing on a slave cannot be larger than 2500.  If there is no slave that has available capacity larger or equal to max concurrency of this job, the job will be waiting until there is at least one slave which have enough available capacity.
 
 <a name="a_new_apis"></a>
-##New APIs
+## New APIs
 All APIs can use both GET and POST.  All old version APIs of REST Commander also work for distributed version.
 ### New API List
 * [Execute Job & Track Progress](#a_job_apis)
@@ -309,7 +309,7 @@ All APIs can use both GET and POST.  All old version APIs of REST Commander also
 ```
 
 <a name="a_deployment"></a>
-##Deployment
+## Deployment
 ### Config File
 To use distributed REST Commander we need to add a config file at "/conf/remoteactorconfig.conf".
 For example:

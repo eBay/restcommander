@@ -19,17 +19,17 @@ REST Commander has been in **[top 10 trending](http://www.restcommander.com/publ
 
 <a name="a_V2"></a>
 
-###[Version 2.0.0](https://github.com/eBay/restcommander/tree/distributed_commander) : distributed REST Commander 
+### [Version 2.0.0](https://github.com/eBay/restcommander/tree/distributed_commander) : distributed REST Commander 
 
 We restructure REST Commander via AKKA remoting and clustering.  Detailed information and API document at [here](/DistributedReadme.md).  Workflow and architecture design details at [here](/Workflow%26Architecture.md). See git branch [distributed_commander](https://github.com/eBay/restcommander/tree/distributed_commander). 
 
-####New Features
+#### New Features
 * **Speed :** By restructuring REST Commander to make it distributed and horizontally scalable, it can send request to **100K+** machines in eBay's cloud and gather result back in just **100s** using **5 VM**.
 * **Reliability :** Automatically failover in case of failure on slave node, and adjust sending speed to avoid network congestion.
 * **Scheduling :** Provide task scheduling to handle multitasks.
 * **Visibility :** Show workload and available capacity of each slave node, track task progress.
 
-####Workflow & Architecture
+#### Workflow & Architecture
 The main workflow of distributed REST Commander is shown as below.
 
 ![Work Flow](/workflow.jpg)
@@ -37,7 +37,7 @@ The main workflow of distributed REST Commander is shown as below.
 Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model. 
 
 <a name="a_whatAndWhy"></a>
-###What is REST Commander and Why I need it?
+### What is REST Commander and Why I need it?
 
 Commander is [Postman](http://www.getpostman.com) at scale: a fast parallel async http client as a service with aggregated response and regular expression based string extraction. It is in Java (with Akka and Play Framework).
 
@@ -50,7 +50,7 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 * **HTTP web server management work flows combining the above 2**: e.g., discover unhealthy webservers and then conduct operations (restart, config push) to them.
 <a name="a_highlights"></a>
 
-###Highlights
+### Highlights
 
 * **Scalable and Fast**: Utilizes Akka and Async HTTP Client to maximize concurrency; Sends and aggregates responses from 10,000+ Servers within 1 minute.
 * **Powerful**: Sends uniform or node-specific requests with near real-time response analysis or config pushes. Request level concurrency control.
@@ -67,14 +67,14 @@ Whenever comes to sending multiple HTTP requests in parallel, federated data agg
 Commander is powerful to send (1) the same request to different servers; (2) different requests to different servers; (3) different requests to the same server. Why we need them? Check out these [live examples](http://www.restcommander.com/usecase.html) on (1) monitor websites; (2) poll job status (3) call the same weather WSDL web service with different zip codes.
 
 <a name="a_performance"></a>
-###Performance (SLA)
+### Performance (SLA)
 * Measured from Commander running on a **single off-the-shelf server**.
 * 1000 servers requests and all responses aggregated in 7 seconds 
 * 10,000 servers requests and all responses aggregated in 48 seconds
 * 20,000 servers requests and all responses aggregated in 70 seconds
 * 20,000 is far less than the maximum scale we tested and it is stable for months. We have not been able to find the scalability limit. :-) 
 
-###[Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a name="a_runInstructions"></a>
+### [Run Instructions](http://www.restsuperman.com/get-started.html#a_zero_installation)<a name="a_runInstructions"></a>
 
 #### Directly Under Windows/Linux With Zero Installation: 
 * Assuming have Java (JDK or most time just JRE) pre-installed.
@@ -119,16 +119,16 @@ Key files are under *conf* folder
 
 ### About REST Commander
 
-####Motivation: 
+#### Motivation: 
 
 REST and SOAP API (HTTP GET/POST/PUT/DELETE) has become the dominant approach in current platform and services. However, efficient REST / SOAP calls to multiple servers in parallel with server-specific requests and aggregated response analysis are still challenging.
 
-####Problem Statement:
+#### Problem Statement:
 
 Design and implement a user friendly and generic HTTP client able to conduct efficient HTTP calls to a large amount of servers in parallel with uniform or server-specific requests and aggregated response analysis. 
 
 
-####Impact
+#### Impact
 
 
 * Improve HTTP/SOAP/REST call efficiency by 100%-5000% with 3-15000 target nodes in parallel, compared to single server POSTMAN or sequential executed none-generic shell scripts.

@@ -4,7 +4,7 @@ Workflow & Architecture : restructure via AKKA to achieve horizontal scalability
 [Overview](#a_overview) | [Actors](#a_actors) |  [Messages](#a_messages)
 
 <a name="a_overview"></a>
-##Overview
+## Overview
 
 **The main workflow of distributed REST Commander is shown as below.**
 
@@ -13,7 +13,7 @@ Workflow & Architecture : restructure via AKKA to achieve horizontal scalability
 **Distributed REST Commander is based on AKKA.  Each functionality component in the pictrue above is implemented as an AKKA actor (except Job Manager).  The whole system is based on message passing model.  In the following sections, we will introduce each actor and messages used by actors to communicate.**
 
 <a name="a_actors"></a>
-##Actors
+## Actors
 
 * [Actors Run on Master Node](#a_actors_of_master)
 	* Job Scheduler
@@ -29,7 +29,7 @@ Workflow & Architecture : restructure via AKKA to achieve horizontal scalability
 	* Assistant Manager
 
 <a name="a_actors_of_master"></a>
-###Actors Run on Master node
+### Actors Run on Master node
 
 #### Job Scheduler
 
@@ -76,7 +76,7 @@ Workflow & Architecture : restructure via AKKA to achieve horizontal scalability
 * The reason why we use multi Individual Collectors is that we need to speed up the process by avoiding network card idle.
 
 <a name="a_actors_of_slave"></a>
-###Actors Run on Slave node
+### Actors Run on Slave node
 
 Major function of these actors below are the same as before.  The new one is dynamically change throttling according to network condition.
 
@@ -94,7 +94,7 @@ Major function of these actors below are the same as before.  The new one is dyn
 
 
 <a name="a_messages"></a>
-##Messages
+## Messages
 
 #### RestartNode
 
